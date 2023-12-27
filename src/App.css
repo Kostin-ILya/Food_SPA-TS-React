@@ -1,0 +1,13 @@
+#root {
+  --main-color: rgb(254, 114, 76);
+  --main-color-hover: rgb(242, 108, 70);
+
+  --grey-text-color: rgb(91, 91, 94);
+
+  --white-color: #fff;
+  --black-color: #000;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
