@@ -4,10 +4,15 @@
 
   --grey-text-color: rgb(91, 91, 94);
 
+  --input-text-color: rgb(196, 196, 196);
+  --label-text-color: rgb(91, 91, 94);
+
   --white-color: #fff;
   --black-color: #000;
 }
 
 body {
   font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  padding: 30px;
 }

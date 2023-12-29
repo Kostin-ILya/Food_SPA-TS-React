@@ -1,0 +1,22 @@
+.input {
+  display: block;
+  margin-top: 5px;
+  height: 65px;
+  width: 325px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 15px 20px 45px 0px rgba(233, 233, 233, 0.25);
+  border: 1px solid rgb(238, 238, 238);
+
+  &::placeholder {
+    color: var(--input-text-color);
+    font-size: 17px;
+    line-height: 23px;
+  }
+}
+
+.label {
+  padding-left: 3px;
+  color: var(--label-text-color);
+  font-size: 16px;
+}
