@@ -1,0 +1,14 @@
+.navigation {
+  padding-top: 50px;
+  flex-grow: 1; //можно задать кнопке margin-top:auto
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.link {
+  display: flex;
+  gap: 15px;
+  color: black;
+  font-size: 16px;
+}

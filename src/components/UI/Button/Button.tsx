@@ -5,7 +5,7 @@ import cl from './Button.module.scss'
 export interface ButtonProps {
   children: React.ReactNode
   onClick?: () => void
-  appearance?: 'big'
+  appearance?: 'big' | 'exit'
   disabled?: boolean
 }
 
@@ -15,11 +15,14 @@ export const Button = ({
   onClick,
   disabled = false,
 }: ButtonProps) => {
-  const { button, big } = cl
+  const { button, big, exit } = cl
 
   return (
     <button
-      className={clsx(button, appearance === 'big' && big)}
+      className={clsx(button, {
+        [big]: appearance === 'big',
+        [exit]: appearance === 'exit',
+      })}
       onClick={onClick}
       disabled={disabled}
     >

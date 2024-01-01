@@ -24,3 +24,12 @@
   text-transform: uppercase;
   font-weight: 600;
 }
+
+.exit {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px;
+}
