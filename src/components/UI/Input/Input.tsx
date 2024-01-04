@@ -1,34 +1,26 @@
+import clsx from 'clsx'
+
 import cl from './Input.module.scss'
 
 export interface InputProps {
-  children: string
   name: string
   placeholder?: string
   value?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Input = ({
-  children,
-  name,
-  placeholder,
-  value,
-  onChange,
-}: InputProps) => {
+export const Input = ({ name, placeholder, value, onChange }: InputProps) => {
   return (
-    <div className={cl.wrapper}>
-      <label className={cl.label} htmlFor={name}>
-        {children}
-      </label>
-      <input
-        className={cl.input}
-        type="text"
-        name={name}
-        id={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-    </div>
+    <input
+      className={clsx(cl.input, {
+        [cl.search]: name === 'search',
+      })}
+      type="text"
+      name={name}
+      id={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+    />
   )
 }

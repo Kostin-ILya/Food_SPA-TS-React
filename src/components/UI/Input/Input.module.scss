@@ -1,5 +1,5 @@
 .input {
-  display: block;
+  // display: block;
   margin-top: 5px;
   height: 65px;
   width: 325px;
@@ -15,8 +15,13 @@
   }
 }
 
-.label {
-  padding-left: 3px;
-  color: var(--label-text-color);
-  font-size: 16px;
+.search {
+  width: 255px;
+  height: 50px;
+  padding: 15px 20px 15px 45px;
+  position: relative;
+  margin-top: 0;
+  &::placeholder {
+    font-size: 14px;
+  }
 }
