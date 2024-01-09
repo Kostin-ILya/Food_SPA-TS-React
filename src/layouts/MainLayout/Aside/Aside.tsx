@@ -1,8 +1,8 @@
 import cl from './Aside.module.scss'
 
 import { Button } from 'components/UI/Button'
-import { UserProfile } from 'layouts/Aside/UserProfile'
-import { Navigation } from 'layouts/Aside/Navigation'
+import { UserProfile } from 'layouts/MainLayout/Aside/UserProfile'
+import { Navigation } from 'layouts/MainLayout/Aside/Navigation'
 
 // export interface AsideProps {
 

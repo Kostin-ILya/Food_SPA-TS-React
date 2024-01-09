@@ -11,4 +11,12 @@
   gap: 15px;
   color: black;
   font-size: 16px;
+  &:hover {
+    color: var(--main-color-hover);
+  }
+}
+
+.active {
+  color: var(--main-color);
+  font-weight: 700;
 }
