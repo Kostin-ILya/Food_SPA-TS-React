@@ -16,7 +16,7 @@ export const Aside = (/* {}: AsideProps */) => {
       <Navigation />
 
       <Button appearance="exit">
-        <img src="/exit_icon.svg" alt="exit_icon" />
+        <img src="/icons/exit_icon.svg" alt="exit_icon" />
         Выход
       </Button>
     </aside>
