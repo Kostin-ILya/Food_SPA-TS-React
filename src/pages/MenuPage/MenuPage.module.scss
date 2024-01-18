@@ -3,3 +3,11 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.productList {
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+  gap: 40px;
+  justify-items: center;
+}
