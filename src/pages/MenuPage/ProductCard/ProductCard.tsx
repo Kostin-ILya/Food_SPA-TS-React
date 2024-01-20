@@ -1,26 +1,20 @@
 import { Link } from 'react-router-dom'
 
 import cl from './ProductCard.module.scss'
+import { IProduct } from 'shared/interfaces'
 
-export interface ProductCardProps {
-  name: string
-  description: string
-  price: number
-  image: string
-  id: number
-  rating: number
-}
+export interface ProductCardProps extends IProduct {}
 
 export const ProductCard = ({
   name,
-  description,
+  ingredients,
   price,
   image,
-  //  id,
+  id,
   rating,
 }: ProductCardProps) => {
   return (
-    <Link to={`/menu/${name}`} className={cl.productCard}>
+    <Link to={`/product/${id}`} className={cl.productCard}>
       <div
         className={cl.imgContainer}
         style={{ backgroundImage: `url(${image})` }}
@@ -44,7 +38,7 @@ export const ProductCard = ({
       <div className={cl.info}>
         <h3>{name}</h3>
 
-        <p>{description}</p>
+        <p>{ingredients.join(', ')}</p>
       </div>
     </Link>
   )
