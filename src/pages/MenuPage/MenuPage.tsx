@@ -9,27 +9,22 @@ import { ProductCard } from './ProductCard'
 import { IProduct } from 'shared/interfaces'
 import cl from './MenuPage.module.scss'
 
-// export interface MenuPageProps {}
-
-export const MenuPage = (/* {}: MenuPageProps */) => {
+export const MenuPage = () => {
   const [products, setProducts] = useState<IProduct[]>([])
   const { request, loadingStatus } = useHTTP()
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = (await request({
-        url: '/products',
-      })) as IProduct[]
-
+    request({
+      url: '/products',
+    }).then((data) => {
       setProducts(data)
-    }
+    })
 
-    fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [])
 
   return (
-    <>
+    <div className={cl.menuPage}>
       <header className={cl.header}>
         <Title>Меню</Title>
         <Search />
@@ -39,15 +34,14 @@ export const MenuPage = (/* {}: MenuPageProps */) => {
         {products.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
+        <Spinner
+          visible={loadingStatus === 'loading'}
+          color="var(--main-color)"
+          height={150}
+          width={150}
+          wrapperClass={cl.spinner}
+        />
       </main>
-
-      <Spinner
-        visible={loadingStatus === 'loading'}
-        color="var(--main-color)"
-        height={150}
-        width={150}
-        wrapperClass={cl.spinner}
-      />
-    </>
+    </div>
   )
 }

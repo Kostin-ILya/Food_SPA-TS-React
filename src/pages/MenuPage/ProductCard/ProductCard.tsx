@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import cl from './ProductCard.module.scss'
 import { IProduct } from 'shared/interfaces'
+import { Rating } from 'components/Rating'
 
 export interface ProductCardProps extends IProduct {}
 
@@ -24,15 +25,10 @@ export const ProductCard = ({
         </div>
 
         <button className={cl.buyIcon}>
-          <img src="/icons/buy_icon.svg" alt="Buy" />
+          <img src="/icons/cart_icon.svg" alt="Buy" />
         </button>
 
-        <div className={cl.rating}>
-          {rating}
-          <span>
-            <img src="/icons/star_icon.svg" alt="star" />
-          </span>
-        </div>
+        <Rating rating={rating} absolute />
       </div>
 
       <div className={cl.info}>

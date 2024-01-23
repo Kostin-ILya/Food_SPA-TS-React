@@ -1,0 +1,77 @@
+.productPage {
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product {
+  margin-top: 50px;
+  display: flex;
+  column-gap: 100px;
+}
+
+.image {
+  border-radius: 10px;
+  width: fit-content;
+  height: fit-content;
+  box-shadow: 18.21px 18.21px 36.43px 0px rgba(211, 209, 216, 0.25);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  width: 250px;
+  font-weight: 500;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(241, 242, 243);
+
+  font-size: 16px;
+
+  span:nth-child(2) {
+    font-size: 19px;
+    span {
+      color: rgb(151, 150, 161);
+    }
+  }
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(241, 242, 243);
+}
+
+.ingredients {
+  ul {
+    padding-top: 10px;
+    padding-left: 20px;
+  }
+
+  li {
+    list-style-type: disc;
+    margin-top: 5px;
+    color: rgb(91, 91, 94);
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

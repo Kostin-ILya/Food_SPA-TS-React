@@ -29,7 +29,7 @@ export const Navigation = () => {
         to="/cart"
         className={({ isActive }) => clsx(cl.link, isActive && cl.active)}
       >
-        <img src="/icons/cart_icon.svg" alt="cart" />
+        <img src="/icons/cart_navigate_icon.svg" alt="cart" />
         Корзина
       </NavLink>
     </nav>

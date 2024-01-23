@@ -8,33 +8,22 @@ import {
 
 import { MainLayout } from 'layouts/MainLayout'
 import { MenuPage } from 'pages/MenuPage'
+import { ProductPage, productLoader } from 'pages/ProductPage'
 
 import 'styles/main.scss'
 import 'styles/reset.css'
-
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <MainLayout />,
-//     children: [
-//       {
-//         index: true,
-//         element: <MenuPage />,
-//       },
-//       {
-//         path: 'menu',
-//         element: <MenuPage />,
-//       },
-//     ],
-//   },
-// ])
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<MenuPage />} />
-        <Route path="menu" element={<MenuPage />} />
+        <Route
+          path="/product/:id"
+          element={<ProductPage />}
+          loader={productLoader}
+          errorElement={<h1>Page not found</h1>}
+        />
       </Route>
       <Route path="*" element={<h1>Page not found</h1>} />
     </>
