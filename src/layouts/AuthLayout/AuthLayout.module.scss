@@ -1,0 +1,22 @@
+.authLayout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.logo {
+  flex-basis: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  flex-basis: 50%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid rgb(212, 214, 224);
+}

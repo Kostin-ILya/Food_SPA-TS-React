@@ -12,6 +12,8 @@ import { ProductPage, productLoader } from 'pages/ProductPage'
 
 import 'styles/main.scss'
 import 'styles/reset.css'
+import { AuthLayout } from 'layouts/AuthLayout'
+import { Login } from 'layouts/AuthLayout/Login'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +27,11 @@ const router = createBrowserRouter(
           errorElement={<h1>Page not found</h1>}
         />
       </Route>
+
+      <Route path="/auth" element={<AuthLayout />}>
+        <Route path="login" element={<Login />} />
+      </Route>
+
       <Route path="*" element={<h1>Page not found</h1>} />
     </>
   )

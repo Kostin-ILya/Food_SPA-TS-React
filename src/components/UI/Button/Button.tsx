@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 
 import cl from './Button.module.scss'
+import { forwardRef } from 'react'
 
 export interface ButtonProps {
   children: React.ReactNode
@@ -9,24 +10,22 @@ export interface ButtonProps {
   disabled?: boolean
 }
 
-export const Button = ({
-  children,
-  appearance,
-  onClick,
-  disabled = false,
-}: ButtonProps) => {
-  const { button, big, exit } = cl
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, appearance, onClick, disabled = false }, ref) => {
+    const { button, big, exit } = cl
 
-  return (
-    <button
-      className={clsx(button, {
-        [big]: appearance === 'big',
-        [exit]: appearance === 'exit',
-      })}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {children}
-    </button>
-  )
-}
+    return (
+      <button
+        className={clsx(button, {
+          [big]: appearance === 'big',
+          [exit]: appearance === 'exit',
+        })}
+        onClick={onClick}
+        disabled={disabled}
+        ref={ref}
+      >
+        {children}
+      </button>
+    )
+  }
+)
