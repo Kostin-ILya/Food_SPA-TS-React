@@ -20,7 +20,7 @@ interface IRequestConfig {
 const useHTTP = () => {
   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('idle')
 
-  const request = async ({
+  const request = async <T>({
     url,
     method = 'get',
     body = null,
@@ -29,7 +29,7 @@ const useHTTP = () => {
     setLoadingStatus('loading')
 
     try {
-      const { data } = await axios({
+      const { data } = await axios<T>({
         url,
         method,
         data: body,

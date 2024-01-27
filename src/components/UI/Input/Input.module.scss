@@ -1,5 +1,4 @@
 .input {
-  // display: block;
   margin-top: 5px;
   height: 65px;
   width: 325px;
@@ -13,6 +12,13 @@
     font-size: 17px;
     line-height: 23px;
   }
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: black;
+  -webkit-box-shadow: 0 0 0px 40rem black inset;
+  box-shadow: 0 0 0px 40rem white inset;
 }
 
 .search {

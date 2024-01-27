@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
@@ -6,12 +6,18 @@ import { Title } from 'components/Title'
 import { InputWithLabel } from 'components/UI/Input/InputWithLabel'
 import { Button } from 'components/UI/Button'
 
-import cl from './Login.module.scss'
+import { SuccessfulAuthRes } from 'shared/interfaces/fetch.interface'
+import cl from './LoginPage.module.scss'
 
-export const Login = () => {
+export const LoginPage = () => {
   const [error, setError] = useState<string | null>(null)
   const submitBtnRef = useRef<HTMLButtonElement>(null)
+  const firstInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    firstInputRef.current?.focus()
+  }, [])
 
   const handleSubmit = async (
     e: React.FormEvent<
@@ -23,7 +29,7 @@ export const Login = () => {
     submitBtnRef.current && (submitBtnRef.current.disabled = true)
     setError(null)
     try {
-      const { data } = await axios.post('/auth/login', {
+      const { data } = await axios.post<SuccessfulAuthRes>('/auth/login', {
         email: e.currentTarget.email.value,
         password: e.currentTarget.password.value,
       })
@@ -44,7 +50,7 @@ export const Login = () => {
       <Title>Вход</Title>
 
       <form className={cl.form} onSubmit={handleSubmit}>
-        <InputWithLabel name="email" placeholder="Email">
+        <InputWithLabel name="email" placeholder="Email" ref={firstInputRef}>
           Ваш email
         </InputWithLabel>
 

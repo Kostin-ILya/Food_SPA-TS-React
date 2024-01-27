@@ -9,11 +9,12 @@ import {
 import { MainLayout } from 'layouts/MainLayout'
 import { MenuPage } from 'pages/MenuPage'
 import { ProductPage, productLoader } from 'pages/ProductPage'
+import { AuthLayout } from 'layouts/AuthLayout'
+import { LoginPage } from 'pages/LoginPage'
+import { RegistrationPage } from 'pages/RegistrationPage'
 
 import 'styles/main.scss'
 import 'styles/reset.css'
-import { AuthLayout } from 'layouts/AuthLayout'
-import { Login } from 'layouts/AuthLayout/Login'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +30,8 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path="/auth" element={<AuthLayout />}>
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="register" element={<RegistrationPage />} />
       </Route>
 
       <Route path="*" element={<h1>Page not found</h1>} />

@@ -14,7 +14,7 @@ export const MenuPage = () => {
   const { request, loadingStatus } = useHTTP()
 
   useEffect(() => {
-    request({
+    request<IProduct[]>({
       url: '/products',
     }).then((data) => {
       setProducts(data)
