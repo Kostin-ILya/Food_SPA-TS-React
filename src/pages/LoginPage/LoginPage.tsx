@@ -1,17 +1,19 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 import { Title } from 'components/Title'
 import { InputWithLabel } from 'components/UI/Input/InputWithLabel'
 import { Button } from 'components/UI/Button'
 
-import { SuccessfulAuthRes } from 'shared/interfaces/fetch.interface'
+import { useHTTP } from 'hooks/useHTTP'
+import {
+  FormInputs,
+  SuccessfulAuthRes,
+} from 'shared/interfaces/fetch.interface'
 import cl from './LoginPage.module.scss'
 
 export const LoginPage = () => {
-  const [error, setError] = useState<string | null>(null)
-  const submitBtnRef = useRef<HTMLButtonElement>(null)
+  const { request, loadingStatus, errorMessage } = useHTTP()
   const firstInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
 
@@ -20,28 +22,24 @@ export const LoginPage = () => {
   }, [])
 
   const handleSubmit = async (
-    e: React.FormEvent<
-      HTMLFormElement & { email: HTMLInputElement; password: HTMLInputElement }
-    >
+    e: React.FormEvent<HTMLFormElement & FormInputs>
   ) => {
     e.preventDefault()
 
-    submitBtnRef.current && (submitBtnRef.current.disabled = true)
-    setError(null)
     try {
-      const { data } = await axios.post<SuccessfulAuthRes>('/auth/login', {
-        email: e.currentTarget.email.value,
-        password: e.currentTarget.password.value,
+      const res = await request<SuccessfulAuthRes>({
+        url: '/auth/login',
+        method: 'post',
+        body: {
+          email: e.currentTarget.email.value,
+          password: e.currentTarget.password.value,
+        },
       })
 
-      localStorage.setItem('jwt', data.access_token)
+      localStorage.setItem('jwt', res.access_token)
       navigate('/')
     } catch (err) {
-      if (axios.isAxiosError(err)) {
-        setError(err.response?.data.message)
-      }
-    } finally {
-      submitBtnRef.current && (submitBtnRef.current.disabled = false)
+      console.log(err)
     }
   }
 
@@ -58,9 +56,9 @@ export const LoginPage = () => {
           Ваш пароль
         </InputWithLabel>
 
-        {error && <div className={cl.error}>{error}</div>}
+        {errorMessage && <div className={cl.error}>{errorMessage}</div>}
 
-        <Button appearance="big" ref={submitBtnRef}>
+        <Button appearance="big" disabled={loadingStatus === 'loading'}>
           Вход
         </Button>
       </form>

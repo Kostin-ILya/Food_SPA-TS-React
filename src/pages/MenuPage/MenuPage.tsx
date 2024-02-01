@@ -16,9 +16,13 @@ export const MenuPage = () => {
   useEffect(() => {
     request<IProduct[]>({
       url: '/products',
-    }).then((data) => {
-      setProducts(data)
     })
+      .then((data) => {
+        setProducts(data!)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
 
     // eslint-disable-next-line
   }, [])

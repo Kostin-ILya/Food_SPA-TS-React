@@ -7,3 +7,9 @@ export interface ErrorRes {
   error: string
   statusCode: number
 }
+
+export interface FormInputs {
+  email: HTMLInputElement
+  password: HTMLInputElement
+  name?: HTMLInputElement
+}

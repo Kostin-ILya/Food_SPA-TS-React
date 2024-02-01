@@ -21,7 +21,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   font-weight: 600;
 
   span {
@@ -43,8 +42,9 @@
   bottom: 23%;
   color: red;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
   border-bottom: 1px solid red;
   padding: 5px;
+  text-align: center;
 }

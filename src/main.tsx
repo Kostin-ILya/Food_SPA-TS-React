@@ -13,8 +13,8 @@ import { AuthLayout } from 'layouts/AuthLayout'
 import { LoginPage } from 'pages/LoginPage'
 import { RegistrationPage } from 'pages/RegistrationPage'
 
-import 'styles/main.scss'
 import 'styles/reset.css'
+import 'styles/main.scss'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
