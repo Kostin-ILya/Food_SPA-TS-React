@@ -15,12 +15,20 @@ import { RegistrationPage } from 'pages/RegistrationPage'
 
 import 'styles/reset.css'
 import 'styles/main.scss'
+import { RequiredAuth } from 'utils/RequiredAuth/RequiredAuth'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<MenuPage />} />
+        <Route
+          index
+          element={
+            <RequiredAuth>
+              <MenuPage />
+            </RequiredAuth>
+          }
+        />
         <Route
           path="/product/:id"
           element={<ProductPage />}
