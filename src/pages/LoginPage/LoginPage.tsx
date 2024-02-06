@@ -11,11 +11,14 @@ import {
   SuccessfulAuthRes,
 } from 'shared/interfaces/fetch.interface'
 import cl from './LoginPage.module.scss'
+import { useAppDispatch } from 'hooks/redux'
+import { fetchUser, loginUser } from 'store/slice/userSlice'
 
 export const LoginPage = () => {
   const { request, loadingStatus, errorMessage } = useHTTP()
   const firstInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     firstInputRef.current?.focus()
@@ -26,21 +29,30 @@ export const LoginPage = () => {
   ) => {
     e.preventDefault()
 
-    try {
-      const res = await request<SuccessfulAuthRes>({
-        url: '/auth/login',
-        method: 'post',
-        body: {
-          email: e.currentTarget.email.value,
-          password: e.currentTarget.password.value,
-        },
-      })
+    // try {
+    //   const res = await request<SuccessfulAuthRes>({
+    //     url: '/auth/login',
+    //     method: 'post',
+    //     body: {
+    //       email: e.currentTarget.email.value,
+    //       password: e.currentTarget.password.value,
+    //     },
+    //   })
 
-      localStorage.setItem('jwt', res.access_token)
-      navigate('/')
-    } catch (err) {
-      console.log(err)
-    }
+    //   localStorage.setItem('jwt', res.access_token)
+    //   navigate('/')
+    // } catch (err) {
+    //   console.log(err)
+    // }
+
+    dispatch(
+      loginUser({
+        email: e.currentTarget.email.value,
+        password: e.currentTarget.password.value,
+      })
+    )
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e))
   }
 
   return (
