@@ -5,6 +5,7 @@ import {
   RouterProvider,
   Route,
 } from 'react-router-dom'
+import { Provider } from 'react-redux'
 
 import { MainLayout } from 'layouts/MainLayout'
 import { MenuPage } from 'pages/MenuPage'
@@ -12,10 +13,11 @@ import { ProductPage, productLoader } from 'pages/ProductPage'
 import { AuthLayout } from 'layouts/AuthLayout'
 import { LoginPage } from 'pages/LoginPage'
 import { RegistrationPage } from 'pages/RegistrationPage'
+import { RequiredAuth } from 'utils/RequiredAuth/RequiredAuth'
 
+import store from 'store'
 import 'styles/reset.css'
 import 'styles/main.scss'
-import { RequiredAuth } from 'utils/RequiredAuth/RequiredAuth'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,5 +50,7 @@ const router = createBrowserRouter(
 )
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 )
