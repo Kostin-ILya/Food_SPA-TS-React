@@ -1,34 +1,25 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
 import {
-  ErrorRes,
-  SuccessfulAuthRes,
-  UserInfo,
-} from 'shared/interfaces/fetch.interface'
+  createSlice,
+  createAsyncThunk,
+  isFulfilled,
+  isPending,
+  isRejected,
+  createSelector,
+} from '@reduxjs/toolkit'
+import axios from 'axios'
+import { UserInfo } from 'shared/interfaces'
+import { ErrorRes, SuccessfulAuthRes } from 'shared/interfaces/fetch.interface'
 
-export interface UserInitState {
-  name: string | null
-  email: string | null
-  error: string | null
+export interface UserState extends UserInfo {
+  isLoading: boolean
+  errorMsg: string | null
 }
-const initialState: UserInitState = {
-  name: null,
-  email: null,
-  error: null,
+const initialState: UserState = {
+  name: '',
+  email: '',
+  isLoading: false,
+  errorMsg: null,
 }
-
-// export const fetchUser = createAsyncThunk(
-//   'user/fetchUser',
-//   async (jwt: string) => {
-//     const { data } = await axios<UserInfo>('/user/profile', {
-//       headers: { Authorization: `Bearer ${jwt}` },
-//     })
-
-//     console.log(data)
-
-//     return data
-//   }
-// )
 
 export const loginUser = createAsyncThunk(
   'user/login',
@@ -42,11 +33,13 @@ export const loginUser = createAsyncThunk(
         password,
       })
 
-      const res = await axios.get('/user/profile', {
+      const { data: userInfo } = await axios.get<UserInfo>('/user/profile', {
         headers: { Authorization: `Bearer ${data.access_token}` },
       })
 
-      return res.data
+      localStorage.setItem('jwt', data.access_token)
+
+      return userInfo
     } catch (error) {
       if (axios.isAxiosError<ErrorRes>(error) && error.response) {
         if (typeof error.response.data.message === 'string') {
@@ -67,24 +60,37 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.pending, (state) => {
-        state.error = null
-      })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.name = action.payload.name
         state.email = action.payload.email
       })
-      .addCase(loginUser.rejected, (state, action) => {
+      .addMatcher(isPending, (state) => {
+        state.isLoading = true
+        state.errorMsg = null
+      })
+      .addMatcher(isFulfilled, (state) => {
+        state.isLoading = false
+      })
+      .addMatcher(isRejected, (state, action) => {
+        state.isLoading = false
         if (typeof action.payload === 'string') {
-          state.error = action.payload
+          state.errorMsg = action.payload
         }
       })
   },
   selectors: {
-    selectUserInfo: (state) => state,
+    getUserInfo: createSelector(
+      [(state) => state.name, (state) => state.email],
+      (name, email) => ({ name, email })
+    ),
+    getFetchStatus: createSelector(
+      [(state) => state.isLoading, (state) => state.errorMsg],
+      (isLoading, errorMsg) => ({ isLoading, errorMsg })
+    ),
   },
 })
 
-export const { selectUserInfo } = userSlice.selectors
+export const { getUserInfo, getFetchStatus } = userSlice.selectors
+export const SelectUserSlice = userSlice.selectSlice
 
 export default userSlice.reducer

@@ -1,4 +1,4 @@
-import { UserInfo } from 'shared/interfaces/fetch.interface'
+import { UserInfo } from 'shared/interfaces'
 import cl from './UserProfile.module.scss'
 
 export interface UserProfileProps extends UserInfo {}

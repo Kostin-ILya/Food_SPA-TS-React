@@ -37,7 +37,7 @@ const useHTTP = () => {
     } catch (error) {
       setLoadingStatus('error')
       if (axios.isAxiosError<ErrorRes>(error) && error.response) {
-        setErrorMessage(error.response.data.message)
+        // setErrorMessage(error.response.data.message)
 
         console.log(error.response?.data.message)
       }

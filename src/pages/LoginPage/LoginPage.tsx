@@ -5,20 +5,17 @@ import { Title } from 'components/Title'
 import { InputWithLabel } from 'components/UI/Input/InputWithLabel'
 import { Button } from 'components/UI/Button'
 
-import { useHTTP } from 'hooks/useHTTP'
-import {
-  FormInputs,
-  SuccessfulAuthRes,
-} from 'shared/interfaces/fetch.interface'
+import { FormInputs } from 'shared/interfaces/fetch.interface'
 import cl from './LoginPage.module.scss'
-import { useAppDispatch } from 'hooks/redux'
-import { fetchUser, loginUser } from 'store/slice/userSlice'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { loginUser, getFetchStatus } from 'store/slice/userSlice'
 
 export const LoginPage = () => {
-  const { request, loadingStatus, errorMessage } = useHTTP()
-  const firstInputRef = useRef<HTMLInputElement>(null)
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
+
+  const { isLoading, errorMsg } = useAppSelector(getFetchStatus)
+  const navigate = useNavigate()
+  const firstInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     firstInputRef.current?.focus()
@@ -29,29 +26,14 @@ export const LoginPage = () => {
   ) => {
     e.preventDefault()
 
-    // try {
-    //   const res = await request<SuccessfulAuthRes>({
-    //     url: '/auth/login',
-    //     method: 'post',
-    //     body: {
-    //       email: e.currentTarget.email.value,
-    //       password: e.currentTarget.password.value,
-    //     },
-    //   })
-
-    //   localStorage.setItem('jwt', res.access_token)
-    //   navigate('/')
-    // } catch (err) {
-    //   console.log(err)
-    // }
-
     dispatch(
       loginUser({
         email: e.currentTarget.email.value,
         password: e.currentTarget.password.value,
       })
     )
-      .then((res) => console.log(res))
+      .unwrap()
+      .then(() => navigate('/'))
       .catch((e) => console.log(e))
   }
 
@@ -68,9 +50,9 @@ export const LoginPage = () => {
           Ваш пароль
         </InputWithLabel>
 
-        {errorMessage && <div className={cl.error}>{errorMessage}</div>}
+        {errorMsg && <div className={cl.error}>{errorMsg}</div>}
 
-        <Button appearance="big" disabled={loadingStatus === 'loading'}>
+        <Button appearance="big" disabled={isLoading}>
           Вход
         </Button>
       </form>

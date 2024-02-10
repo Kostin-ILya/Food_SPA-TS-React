@@ -5,13 +5,11 @@ import { UserProfile } from 'layouts/MainLayout/Aside/UserProfile'
 import { Navigation } from 'layouts/MainLayout/Aside/Navigation'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'hooks/redux'
-import { selectUserInfo } from 'store/slice/userSlice'
+import { getUserInfo } from 'store/slice/userSlice'
 
 export const Aside = () => {
   const navigate = useNavigate()
-  const { email, name } = useAppSelector(selectUserInfo)
-
-  console.log(email, name)
+  const { email, name } = useAppSelector(getUserInfo)
 
   const handleLogout = () => {
     localStorage.removeItem('jwt')
@@ -20,7 +18,7 @@ export const Aside = () => {
 
   return (
     <aside className={cl.aside}>
-      {email && name && <UserProfile name={name} email={email} />}
+      {<UserProfile name={name || 'Админ'} email={email || 'admin@ya.ru'} />}
 
       <Navigation />
 

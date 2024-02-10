@@ -13,8 +13,3 @@ export interface FormInputs {
   password: HTMLInputElement
   name?: HTMLInputElement
 }
-
-export interface UserInfo {
-  name: string
-  email: string
-}
