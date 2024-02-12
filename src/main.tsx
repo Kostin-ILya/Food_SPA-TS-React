@@ -16,6 +16,7 @@ import { RegistrationPage } from 'pages/RegistrationPage'
 import { RequiredAuth } from 'utils/RequiredAuth/RequiredAuth'
 
 import store from 'store'
+
 import 'styles/reset.css'
 import 'styles/main.scss'
 

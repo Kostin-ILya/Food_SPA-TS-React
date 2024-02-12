@@ -1,14 +1,16 @@
 import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
 
 import { Title } from 'components/Title'
 import { InputWithLabel } from 'components/UI/Input/InputWithLabel'
 import { Button } from 'components/UI/Button'
 
 import { FormInputs } from 'shared/interfaces/fetch.interface'
+import { getFetchStatus } from 'store/user/userSlice'
+import { loginUser } from 'store/user/asyncUserThunk'
+
 import cl from './LoginPage.module.scss'
-import { useAppDispatch, useAppSelector } from 'hooks/redux'
-import { loginUser, getFetchStatus } from 'store/slice/userSlice'
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch()
@@ -34,7 +36,6 @@ export const LoginPage = () => {
     )
       .unwrap()
       .then(() => navigate('/'))
-      .catch((e) => console.log(e))
   }
 
   return (

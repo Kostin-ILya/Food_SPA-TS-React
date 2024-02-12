@@ -6,6 +6,8 @@ interface RequiredAuthProps {
 
 export const RequiredAuth = ({ children }: RequiredAuthProps) => {
   if (!localStorage.getItem('jwt')) {
+    console.log('no jwt')
+
     return <Navigate to="/auth/login" />
   }
 

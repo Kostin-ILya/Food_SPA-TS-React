@@ -1,21 +1,21 @@
 import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useHTTP } from 'hooks/useHTTP'
 
 import { Title } from 'components/Title'
 import { InputWithLabel } from 'components/UI/Input/InputWithLabel'
 import { Button } from 'components/UI/Button'
 
-import {
-  FormInputs,
-  SuccessfulAuthRes,
-} from 'shared/interfaces/fetch.interface'
+import { FormInputs } from 'shared/interfaces'
 import cl from './RegistrationPage.module.scss'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { getFetchStatus } from 'store/user/userSlice'
+import { registerUser } from 'store/user/asyncUserThunk'
 
 export const RegistrationPage = () => {
-  const { request, loadingStatus, errorMessage } = useHTTP()
-  const firstInputRef = useRef<HTMLInputElement>(null)
+  const dispatch = useAppDispatch()
+  const { isLoading, errorMsg } = useAppSelector(getFetchStatus)
   const navigate = useNavigate()
+  const firstInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     firstInputRef.current?.focus()
@@ -26,22 +26,15 @@ export const RegistrationPage = () => {
   ) => {
     e.preventDefault()
 
-    try {
-      const res = await request<SuccessfulAuthRes>({
-        url: '/auth/register',
-        method: 'post',
-        body: {
-          email: e.currentTarget.email.value,
-          password: e.currentTarget.password.value,
-          name: e.currentTarget.name.value,
-        },
+    dispatch(
+      registerUser({
+        email: e.currentTarget.email.value,
+        password: e.currentTarget.password.value,
+        name: e.currentTarget.name.value,
       })
-
-      localStorage.setItem('jwt', res.access_token)
-      navigate('/')
-    } catch (err) {
-      console.log(err)
-    }
+    )
+      .unwrap()
+      .then(() => navigate('/'))
   }
 
   return (
@@ -66,9 +59,9 @@ export const RegistrationPage = () => {
           Ваше имя
         </InputWithLabel>
 
-        {errorMessage && <div className={cl.error}>{errorMessage}</div>}
+        {errorMsg && <div className={cl.error}>{errorMsg}</div>}
 
-        <Button appearance="big" disabled={loadingStatus === 'loading'}>
+        <Button appearance="big" disabled={isLoading}>
           Зарегистрироваться
         </Button>
       </form>

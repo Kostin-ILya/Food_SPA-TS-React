@@ -1,7 +1,7 @@
-import { UserInfo } from 'shared/interfaces'
+import { User } from 'shared/interfaces'
 import cl from './UserProfile.module.scss'
 
-export interface UserProfileProps extends UserInfo {}
+export interface UserProfileProps extends User {}
 
 export const UserProfile = ({ name, email }: UserProfileProps) => {
   return (

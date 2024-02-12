@@ -5,7 +5,7 @@ import { UserProfile } from 'layouts/MainLayout/Aside/UserProfile'
 import { Navigation } from 'layouts/MainLayout/Aside/Navigation'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'hooks/redux'
-import { getUserInfo } from 'store/slice/userSlice'
+import { getUserInfo } from 'store/user/userSlice'
 
 export const Aside = () => {
   const navigate = useNavigate()
