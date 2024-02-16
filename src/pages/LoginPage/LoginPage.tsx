@@ -36,6 +36,7 @@ export const LoginPage = () => {
     )
       .unwrap()
       .then(() => navigate('/'))
+      .catch((err) => console.error('Fetch error', err))
   }
 
   return (

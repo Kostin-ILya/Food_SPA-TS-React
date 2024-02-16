@@ -13,7 +13,7 @@ import { ProductPage, productLoader } from 'pages/ProductPage'
 import { AuthLayout } from 'layouts/AuthLayout'
 import { LoginPage } from 'pages/LoginPage'
 import { RegistrationPage } from 'pages/RegistrationPage'
-import { RequiredAuth } from 'utils/RequiredAuth/RequiredAuth'
+import { RequiredAuth } from 'utils/RequiredAuth'
 
 import store from 'store'
 

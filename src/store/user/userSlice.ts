@@ -6,16 +6,19 @@ import {
   createSelector,
 } from '@reduxjs/toolkit'
 
-import { loginUser, registerUser } from 'store/user/asyncUserThunk'
+import { loginUser, registerUser, userProfile } from 'store/user/asyncUserThunk'
 import { User } from 'shared/interfaces'
+import { getLocalStorage } from 'utils/localStorage'
 
 export interface UserState extends User {
+  jwt: string | null
   isLoading: boolean
-  errorMsg: string | null
+  errorMsg: string | string[] | null
 }
 const initialState: UserState = {
   name: '',
   email: '',
+  jwt: getLocalStorage('jwt'),
   isLoading: false,
   errorMsg: null,
 }
@@ -23,16 +26,21 @@ const initialState: UserState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.jwt = null
+      state.name = ''
+      state.email = ''
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(userProfile.fulfilled, (state, action) => {
         state.name = action.payload.name
         state.email = action.payload.email
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
-        state.name = action.payload.name
-        state.email = action.payload.email
+      .addMatcher(isFulfilled(loginUser, registerUser), (state, action) => {
+        state.jwt = action.payload.access_token
       })
       .addMatcher(isPending, (state) => {
         state.isLoading = true
@@ -43,7 +51,10 @@ const userSlice = createSlice({
       })
       .addMatcher(isRejected, (state, action) => {
         state.isLoading = false
-        if (typeof action.payload === 'string') {
+        if (
+          typeof action.payload === 'string' ||
+          Array.isArray(action.payload)
+        ) {
           state.errorMsg = action.payload
         }
       })
@@ -60,10 +71,11 @@ const userSlice = createSlice({
       ],
       (isLoading, errorMsg) => ({ isLoading, errorMsg })
     ),
+    getJwt: (state) => state.jwt,
   },
 })
 
-export const { getUserInfo, getFetchStatus } = userSlice.selectors
-export const SelectUserSlice = userSlice.selectSlice
+export const { getUserInfo, getFetchStatus, getJwt } = userSlice.selectors
+export const { logout } = userSlice.actions
 
 export default userSlice.reducer

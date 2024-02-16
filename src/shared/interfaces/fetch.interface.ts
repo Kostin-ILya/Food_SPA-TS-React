@@ -1,4 +1,4 @@
-export interface SuccessfulAuthRes {
+export interface AuthRes {
   access_token: string
 }
 

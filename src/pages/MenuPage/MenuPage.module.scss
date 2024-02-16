@@ -1,6 +1,3 @@
-.menuPage {
-}
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -8,7 +5,7 @@
 }
 
 .productList {
-  padding-top: 30px;
+  padding-top: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
   gap: 40px;
