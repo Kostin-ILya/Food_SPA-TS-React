@@ -10,7 +10,6 @@ export const RequiredAuth = ({ children }: RequiredAuthProps) => {
   const jwt = useAppSelector(getJwt)
 
   if (!jwt) {
-    console.log('no jwt')
     return <Navigate to="/auth/login" />
   }
 

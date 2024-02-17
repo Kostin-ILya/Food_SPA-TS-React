@@ -4,6 +4,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
   Route,
+  Navigate,
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
@@ -23,15 +24,15 @@ import 'styles/main.scss'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<MainLayout />}>
-        <Route
-          index
-          element={
-            <RequiredAuth>
-              <MenuPage />
-            </RequiredAuth>
-          }
-        />
+      <Route
+        path="/"
+        element={
+          <RequiredAuth>
+            <MainLayout />
+          </RequiredAuth>
+        }
+      >
+        <Route index element={<MenuPage />} />
         <Route
           path="/product/:id"
           element={<ProductPage />}
@@ -45,7 +46,7 @@ const router = createBrowserRouter(
         <Route path="register" element={<RegistrationPage />} />
       </Route>
 
-      <Route path="*" element={<h1>Page not found</h1>} />
+      <Route path="*" element={<Navigate to="/auth/login" />} />
     </>
   )
 )
