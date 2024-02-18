@@ -1,10 +1,9 @@
 {
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/.*",
       "dest": "/index.html",
-      "methods": ["GET"],
-      "continue": false
+      "status": 200
     }
   ]
 }
