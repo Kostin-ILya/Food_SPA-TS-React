@@ -46,7 +46,7 @@ const router = createBrowserRouter(
         <Route path="register" element={<RegistrationPage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/auth/login" />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </>
   )
 )

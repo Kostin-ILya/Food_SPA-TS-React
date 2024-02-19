@@ -9,15 +9,18 @@ import { IProduct } from 'shared/interfaces'
 import cl from './ProductPage.module.scss'
 import { Button } from 'components/UI/Button'
 import { Rating } from 'components/Rating'
+import { useAppDispatch } from 'hooks/redux'
+import { addToCart } from 'store/cart/cartSlice'
 
 export const productLoader = ({ params }: { params: { id?: string } }) => {
   return defer({
-    data: axios.get(`/products/${params.id}`).then((res) => res.data),
+    data: axios.get<IProduct>(`/products/${params.id}`).then((res) => res.data),
   })
 }
 
 export const ProductPage = () => {
   const { data } = useLoaderData() as { data: IProduct }
+  const dispatch = useAppDispatch()
 
   return (
     <>
@@ -32,39 +35,47 @@ export const ProductPage = () => {
         }
       >
         <Await resolve={data}>
-          {(product: IProduct) => (
+          {({ id, name, ingredients, price, image, rating }: IProduct) => (
             <>
               <header className={cl.header}>
-                <Title>{product.name}</Title>
-                <Button appearance="exit">
+                <Title>{name}</Title>
+                <Button
+                  appearance="exit"
+                  onClick={() =>
+                    dispatch(
+                      addToCart({
+                        id,
+                        name,
+                        price,
+                        image,
+                      })
+                    )
+                  }
+                >
                   <img src="/icons/cart_icon.svg" alt="cart" />В корзину
                 </Button>
               </header>
 
               <main className={cl.product}>
-                <img
-                  className={cl.image}
-                  src={product.image}
-                  alt={product.name}
-                />
+                <img className={cl.image} src={image} alt={name} />
 
                 <div className={cl.info}>
                   <div className={cl.price}>
                     Цена
                     <span>
-                      {product.price} <span> ₽</span>
+                      {price} <span> ₽</span>
                     </span>
                   </div>
 
                   <div className={cl.rating}>
                     Рейтинг
-                    <Rating rating={product.rating} />
+                    <Rating rating={rating} />
                   </div>
 
                   <div className={cl.ingredients}>
                     Состав:
                     <ul className={cl.ingredientsList}>
-                      {product.ingredients.map((ingredient, index) => (
+                      {ingredients.map((ingredient, index) => (
                         <li key={index}>{ingredient}</li>
                       ))}
                     </ul>
