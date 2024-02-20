@@ -15,7 +15,9 @@ interface IRequestConfig {
 
 const useHTTP = () => {
   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('idle')
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [errorMessage, setErrorMessage] = useState<string | string[] | null>(
+    null
+  )
 
   const request = async <T>({
     url,
@@ -37,7 +39,7 @@ const useHTTP = () => {
     } catch (error) {
       setLoadingStatus('error')
       if (axios.isAxiosError<ErrorRes>(error) && error.response) {
-        // setErrorMessage(error.response.data.message)
+        setErrorMessage(error.response.data.message)
 
         console.log(error.response?.data.message)
       }

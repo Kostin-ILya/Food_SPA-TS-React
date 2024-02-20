@@ -8,10 +8,12 @@ export interface InputProps {
   name: string
   placeholder?: string
   type?: 'password' | 'text' | 'email'
+  value?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ name, placeholder, type = 'text' }, ref) => {
+  ({ name, placeholder, type = 'text', onChange, value }, ref) => {
     return (
       <input
         className={clsx(cl.input, {
@@ -20,6 +22,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         type={type}
         name={name}
         id={name}
+        onChange={onChange}
+        value={value}
         placeholder={placeholder}
         autoComplete={type === 'password' ? 'off' : 'on'}
         ref={ref}

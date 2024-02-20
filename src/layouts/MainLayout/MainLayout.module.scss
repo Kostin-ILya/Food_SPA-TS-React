@@ -1,5 +1,7 @@
 .mainLayout {
   display: flex;
+
+  position: relative;
   max-width: 1140px;
   margin: 0 auto;
   min-height: 100vh;
@@ -12,4 +14,18 @@
   width: 100%;
   padding: 40px 60px;
   position: relative;
+}
+
+.footer {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  a {
+    text-decoration: none;
+    color: rgb(204 84 51);
+    font-size: 13px;
+    font-weight: 600;
+  }
 }

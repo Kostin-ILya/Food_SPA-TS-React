@@ -2,7 +2,8 @@
   width: 325px;
   height: 250px;
   border-radius: 18px;
-  box-shadow: 18px 18px 36.43px 0px rgba(211, 209, 216, 0.25);
+  // box-shadow: 18px 18px 36.43px 0px rgba(211, 209, 216, 0.25);
+  box-shadow: 0px 0px 15px 5px #fe724c33;
   transition: 0.15s transform ease-in-out;
   color: black;
 
@@ -60,6 +61,7 @@
 
 .info {
   margin-top: 20px;
+  padding-left: 15px;
 
   h3 {
     color: black;

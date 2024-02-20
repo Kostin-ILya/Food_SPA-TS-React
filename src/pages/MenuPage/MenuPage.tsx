@@ -11,6 +11,7 @@ import cl from './MenuPage.module.scss'
 
 export const MenuPage = () => {
   const [products, setProducts] = useState<IProduct[]>([])
+  const [search, setSearch] = useState<string>('')
   const { request, loadingStatus } = useHTTP()
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export const MenuPage = () => {
       url: '/products',
     })
       .then((data) => {
-        setProducts(data!)
+        setProducts(data)
       })
       .catch((e) => {
         console.log(e)
@@ -27,17 +28,34 @@ export const MenuPage = () => {
     // eslint-disable-next-line
   }, [])
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value)
+  }
+
+  const filteredProducts = products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(search.toLowerCase()) ||
+      product.ingredients.join(' ').toLowerCase().includes(search.toLowerCase())
+  )
+
   return (
     <div className={cl.menuPage}>
       <header className={cl.header}>
         <Title>Меню</Title>
-        <Search />
+        <Search search={search} setSearch={handleSearch} />
       </header>
 
       <main className={cl.productList}>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
+
+        {filteredProducts.length === 0 && (
+          <div className={cl.noProducts}>
+            Ничего не найдено, измените запрос
+          </div>
+        )}
+
         <Spinner
           visible={loadingStatus === 'loading'}
           color="var(--main-color)"

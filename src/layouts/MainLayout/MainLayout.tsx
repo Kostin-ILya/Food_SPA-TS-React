@@ -13,6 +13,11 @@ export const MainLayout = () => {
 
       <main className={cl.content}>
         <Outlet />
+        <footer className={cl.footer}>
+          <a href="https://github.com/Kostin-ilya" target="_blank">
+            © 2024 Kostin Ilia. Все права защищены.
+          </a>
+        </footer>
       </main>
     </div>
   )
