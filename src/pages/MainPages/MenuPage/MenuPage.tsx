@@ -50,7 +50,7 @@ export const MenuPage = () => {
           <ProductCard key={product.id} {...product} />
         ))}
 
-        {filteredProducts.length === 0 && (
+        {search !== '' && filteredProducts.length === 0 && (
           <div className={cl.noProducts}>
             Ничего не найдено, измените запрос
           </div>

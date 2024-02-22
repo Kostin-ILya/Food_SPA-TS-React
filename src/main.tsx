@@ -9,17 +9,18 @@ import {
 import { Provider } from 'react-redux'
 
 import { MainLayout } from 'layouts/MainLayout'
-import { MenuPage } from 'pages/MenuPage'
-import { ProductPage, productLoader } from 'pages/ProductPage'
+import { MenuPage } from 'pages/MainPages/MenuPage'
+import { ProductPage, productLoader } from 'pages/MainPages/ProductPage'
 import { AuthLayout } from 'layouts/AuthLayout'
-import { LoginPage } from 'pages/LoginPage'
-import { RegistrationPage } from 'pages/RegistrationPage'
+import { LoginPage } from 'pages/AuthPages/LoginPage'
+import { RegistrationPage } from 'pages/AuthPages/RegistrationPage'
 import { RequiredAuth } from 'utils/RequiredAuth'
 
 import store from 'store'
 
 import 'styles/reset.css'
 import 'styles/main.scss'
+import { CartPage } from 'pages/MainPages/CartPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,9 @@ const router = createBrowserRouter(
         }
       >
         <Route index element={<MenuPage />} />
+
+        <Route path="/cart" element={<CartPage />} />
+
         <Route
           path="/product/:id"
           element={<ProductPage />}

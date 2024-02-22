@@ -5,18 +5,19 @@ import { forwardRef } from 'react'
 
 export interface ButtonProps {
   children: React.ReactNode
+  className?: string
   onClick?: () => void
   appearance?: 'big' | 'exit'
   disabled?: boolean
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, appearance, onClick, disabled = false }, ref) => {
+  ({ children, appearance, className, onClick, disabled = false }, ref) => {
     const { button, big, exit } = cl
 
     return (
       <button
-        className={clsx(button, {
+        className={clsx(button, className, {
           [big]: appearance === 'big',
           [exit]: appearance === 'exit',
         })}
