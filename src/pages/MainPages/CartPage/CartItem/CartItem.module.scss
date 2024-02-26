@@ -1,0 +1,90 @@
+.cartItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-weight: 600;
+  font-size: 16px;
+  border: 1px solid rgb(254 114 76 / 22%);
+  box-shadow: 0px 0px 15px 5px #fe724c33;
+  padding: 10px;
+  border-radius: 20px;
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h3 {
+      font-size: 18px;
+    }
+
+    .price {
+      color: var(--main-color);
+    }
+  }
+
+  .imgContainer {
+    width: 80px;
+    height: 80px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+  }
+
+  .count {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      > div {
+        width: 28px;
+        height: 28px;
+        border-radius: 17px;
+        box-shadow: 0px 20px 30px 0px rgb(238, 240, 242);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .minus {
+        border: 1px solid var(--main-color);
+        color: var(--main-color);
+        padding-left: 1px;
+        img {
+          width: 10px;
+        }
+      }
+
+      .plus {
+        background-color: var(--main-color);
+        color: white;
+        img {
+          width: 13px;
+          height: 13px;
+        }
+      }
+    }
+
+    .delete {
+      width: 24px;
+      cursor: pointer;
+    }
+  }
+}
