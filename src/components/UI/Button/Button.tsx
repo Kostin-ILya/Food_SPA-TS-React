@@ -7,19 +7,19 @@ export interface ButtonProps {
   children: React.ReactNode
   className?: string
   onClick?: () => void
-  appearance?: 'big' | 'exit'
+  appearance?: 'big' | 'withIcon'
   disabled?: boolean
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, appearance, className, onClick, disabled = false }, ref) => {
-    const { button, big, exit } = cl
+    const { button, big, withIcon } = cl
 
     return (
       <button
         className={clsx(button, className, {
           [big]: appearance === 'big',
-          [exit]: appearance === 'exit',
+          [withIcon]: appearance === 'withIcon',
         })}
         onClick={onClick}
         disabled={disabled}

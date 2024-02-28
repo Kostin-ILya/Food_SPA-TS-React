@@ -1,9 +1,17 @@
 import { CartItem as TCartItem } from 'shared/interfaces/'
+import { useAppDispatch } from 'hooks/redux'
+import {
+  decreaseCount,
+  increaseCount,
+  removeFromCart,
+} from 'store/cart/cartSlice'
 import cl from './CartItem.module.scss'
 
 export interface CartItemProps extends TCartItem {}
 
 export const CartItem = ({ id, name, price, image, count }: CartItemProps) => {
+  const dispatch = useAppDispatch()
+
   return (
     <div className={cl.cartItem}>
       <div className={cl.content}>
@@ -20,18 +28,23 @@ export const CartItem = ({ id, name, price, image, count }: CartItemProps) => {
 
       <div className={cl.count}>
         <div className={cl.buttons}>
-          <div className={cl.minus}>
+          <div className={cl.minus} onClick={() => dispatch(decreaseCount(id))}>
             <img src="/icons/minus.svg" alt="minus" />
           </div>
 
           <span>{count}</span>
 
-          <div className={cl.plus}>
+          <div className={cl.plus} onClick={() => dispatch(increaseCount(id))}>
             <img src="/icons/plus.svg" alt="plus" />
           </div>
         </div>
 
-        <img className={cl.delete} src="/icons/delete_icon.svg" alt="delete" />
+        <img
+          className={cl.delete}
+          onClick={() => dispatch(removeFromCart(id))}
+          src="/icons/delete_icon.svg"
+          alt="delete"
+        />
       </div>
     </div>
   )

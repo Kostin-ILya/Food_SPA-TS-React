@@ -33,8 +33,8 @@ export const Aside = () => {
 
       <Navigation />
 
-      <Button appearance="exit" onClick={handleLogout}>
-        <img src="/icons/exit_icon.svg" alt="exit_icon" />
+      <Button appearance="withIcon" onClick={handleLogout}>
+        <img src="/icons/exit_icon.svg" alt="exit" />
         Выход
       </Button>
     </aside>

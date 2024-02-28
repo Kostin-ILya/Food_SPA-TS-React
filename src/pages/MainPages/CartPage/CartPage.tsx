@@ -5,10 +5,24 @@ import { CartItem } from './CartItem'
 import { useAppSelector } from 'hooks/redux'
 import { getCartItems } from 'store/cart/cartSlice'
 
-export interface CartPageProps {}
-
-export const CartPage = (/* {}: CartPageProps */) => {
+export const CartPage = () => {
   const items = useAppSelector(getCartItems)
+
+  const totalCost = items.reduce(
+    (acc, item) => acc + item.price * item.count,
+    0
+  )
+
+  if (!items.length) {
+    return (
+      <>
+        <Title>Корзина</Title>
+        <div className={cl.empty}>
+          <Title>Корзина пуста</Title>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -30,19 +44,19 @@ export const CartPage = (/* {}: CartPageProps */) => {
           <div>
             <span>Итог</span>
             <div>
-              600 <span className={cl.ruble}>₽</span>
+              {totalCost} <span className={cl.ruble}>₽</span>
             </div>
           </div>
           <div>
             <span>Доставка</span>
             <div>
-              600 <span className={cl.ruble}>₽</span>
+              290 <span className={cl.ruble}>₽</span>
             </div>
           </div>
           <div>
             <span>Общая стоимость</span>
             <div>
-              1200 <span className={cl.ruble}>₽</span>
+              {totalCost + 290} <span className={cl.ruble}>₽</span>
             </div>
           </div>
         </div>

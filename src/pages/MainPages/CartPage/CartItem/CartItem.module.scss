@@ -31,8 +31,8 @@
   }
 
   .imgContainer {
-    width: 80px;
-    height: 80px;
+    width: 115px;
+    height: 70px;
 
     img {
       width: 100%;
@@ -53,8 +53,8 @@
       gap: 10px;
 
       > div {
-        width: 28px;
-        height: 28px;
+        width: 29px;
+        height: 29px;
         border-radius: 17px;
         box-shadow: 0px 20px 30px 0px rgb(238, 240, 242);
         display: flex;
@@ -66,7 +66,7 @@
       .minus {
         border: 1px solid var(--main-color);
         color: var(--main-color);
-        padding-left: 1px;
+
         img {
           width: 10px;
         }

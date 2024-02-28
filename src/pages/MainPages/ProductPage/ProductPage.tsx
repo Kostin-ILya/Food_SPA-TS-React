@@ -40,7 +40,7 @@ export const ProductPage = () => {
               <header className={cl.header}>
                 <Title>{name}</Title>
                 <Button
-                  appearance="exit"
+                  appearance="withIcon"
                   onClick={() =>
                     dispatch(
                       addToCart({
