@@ -6,7 +6,7 @@ import { forwardRef } from 'react'
 export interface ButtonProps {
   children: React.ReactNode
   className?: string
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   appearance?: 'big' | 'withIcon'
   disabled?: boolean
 }
