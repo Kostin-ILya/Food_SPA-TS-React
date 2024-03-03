@@ -21,6 +21,7 @@ import store from 'store'
 import 'styles/reset.css'
 import 'styles/main.scss'
 import { CartPage } from 'pages/MainPages/CartPage'
+import { SuccessPage } from 'pages/MainPages/SuccessPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +37,8 @@ const router = createBrowserRouter(
         <Route index element={<MenuPage />} />
 
         <Route path="/cart" element={<CartPage />} />
+
+        <Route path="/success" element={<SuccessPage />} />
 
         <Route
           path="/product/:id"

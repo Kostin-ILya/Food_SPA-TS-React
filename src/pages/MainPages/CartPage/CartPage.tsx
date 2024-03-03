@@ -1,28 +1,29 @@
+import axios from 'axios'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
+
 import { Title } from 'components/Title'
-import cl from './CartPage.module.scss'
 import { Button } from 'components/UI/Button'
 import { CartItem } from './CartItem'
-import { useAppDispatch, useAppSelector } from 'hooks/redux'
+
 import { clearCart, getCartItems } from 'store/cart/cartSlice'
-import axios from 'axios'
 import { getJwt } from 'store/user/userSlice'
-import { useState } from 'react'
+import cl from './CartPage.module.scss'
 
 export const CartPage = () => {
   const [isSending, setIsSending] = useState(false)
   const items = useAppSelector(getCartItems)
   const jwt = useAppSelector(getJwt)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const totalCost = items.reduce(
     (acc, item) => acc + item.price * item.count,
     0
   )
 
-  items.map((item) => ({ id: item.id, count: item.count }))
-
-  const handleSendOrder = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+  const handleSendOrder = () => {
     setIsSending(true)
 
     axios
@@ -36,6 +37,7 @@ export const CartPage = () => {
         }
       )
       .then(() => {
+        navigate('/success')
         setIsSending(false)
         dispatch(clearCart())
       })
