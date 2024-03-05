@@ -22,7 +22,6 @@ export const Aside = () => {
   }, [dispatch])
 
   const handleLogout = () => {
-    localStorage.removeItem('jwt')
     dispatch(logout())
     navigate('/auth/login')
   }

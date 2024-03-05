@@ -3,7 +3,6 @@ import axios from 'axios'
 
 import { User, UserAuth, ErrorRes, AuthRes } from 'shared/interfaces'
 import { RootState } from 'store'
-import { setLocalStorage } from 'utils/localStorage'
 
 export const loginUser = createAsyncThunk<AuthRes, UserAuth>(
   'user/login',
@@ -13,7 +12,6 @@ export const loginUser = createAsyncThunk<AuthRes, UserAuth>(
         email,
         password,
       })
-      setLocalStorage('jwt', data.access_token)
 
       return data
     } catch (error) {
@@ -34,7 +32,6 @@ export const registerUser = createAsyncThunk<AuthRes, UserAuth>(
         password,
         name,
       })
-      setLocalStorage('jwt', data.access_token)
 
       return data
     } catch (error) {

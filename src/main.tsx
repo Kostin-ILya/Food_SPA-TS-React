@@ -7,21 +7,25 @@ import {
   Navigate,
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
-import { MainLayout } from 'layouts/MainLayout'
-import { MenuPage } from 'pages/MainPages/MenuPage'
-import { ProductPage, productLoader } from 'pages/MainPages/ProductPage'
-import { AuthLayout } from 'layouts/AuthLayout'
-import { LoginPage } from 'pages/AuthPages/LoginPage'
-import { RegistrationPage } from 'pages/AuthPages/RegistrationPage'
-import { RequiredAuth } from 'utils/RequiredAuth'
+import {
+  CartPage,
+  MenuPage,
+  ProductPage,
+  SuccessPage,
+  LoginPage,
+  RegistrationPage,
+  productLoader,
+} from 'pages'
+import { AuthLayout, MainLayout } from 'layouts'
 
 import store from 'store'
+import { persistor } from 'store'
+import { RequiredAuth } from 'utils/RequiredAuth'
 
 import 'styles/reset.css'
 import 'styles/main.scss'
-import { CartPage } from 'pages/MainPages/CartPage'
-import { SuccessPage } from 'pages/MainPages/SuccessPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -60,6 +64,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
-    <RouterProvider router={router} />
+    <PersistGate loading={null} persistor={persistor}>
+      <RouterProvider router={router} />
+    </PersistGate>
   </Provider>
 )

@@ -14,7 +14,7 @@ export const UserProfile = ({ name, email, isLoading }: UserProfileProps) => {
       <h2 className={cl.name}>{name}</h2>
       <p className={cl.email}>{email}</p>
 
-      {isLoading && (
+      {!name && isLoading && (
         <div className={cl.spinner}>
           <RotatingLines strokeColor="var(--main-color)" width="50" />
         </div>

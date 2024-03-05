@@ -8,7 +8,6 @@ import {
 
 import { loginUser, registerUser, userProfile } from 'store/user/asyncUserThunk'
 import { User } from 'shared/interfaces'
-import { getLocalStorage } from 'utils/localStorage'
 
 export interface UserState extends User {
   jwt: string | null
@@ -18,7 +17,7 @@ export interface UserState extends User {
 const initialState: UserState = {
   name: '',
   email: '',
-  jwt: getLocalStorage('jwt'),
+  jwt: '',
   isLoading: false,
   errorMsg: null,
 }
