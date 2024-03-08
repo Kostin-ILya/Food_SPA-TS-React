@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import clsx from 'clsx'
 
 import cl from './Button.module.scss'
@@ -16,7 +17,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const { button, big, withIcon } = cl
 
     return (
-      <button
+      <motion.button
         className={clsx(button, className, {
           [big]: appearance === 'big',
           [withIcon]: appearance === 'withIcon',
@@ -24,9 +25,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onClick}
         disabled={disabled}
         ref={ref}
+        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.1 }}
       >
         {children}
-      </button>
+      </motion.button>
     )
   }
 )

@@ -1,14 +1,10 @@
-.productCard {
+.card {
   width: 325px;
   height: 250px;
   border-radius: 18px;
-  // box-shadow: 18px 18px 36.43px 0px rgba(211, 209, 216, 0.25);
   box-shadow: 0px 0px 15px 5px #fe724c33;
-  transition: 0.15s transform ease-in-out;
-  color: black;
-
-  &:hover {
-    transform: scale(1.01);
+  a {
+    color: black;
   }
 }
 
@@ -17,7 +13,6 @@
   width: 323px;
   height: 165px;
   border-radius: 18px;
-  // background: url('/images/food/roast.png') no-repeat center center/cover;
 
   .price {
     height: 34px;
@@ -52,10 +47,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    &:hover {
-      filter: contrast(2);
-    }
   }
 }
 

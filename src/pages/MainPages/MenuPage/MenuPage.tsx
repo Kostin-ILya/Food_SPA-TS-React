@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useHTTP } from 'hooks/useHTTP'
+import { AnimatePresence } from 'framer-motion'
 
 import { Grid as Spinner } from 'react-loader-spinner'
 import { Title } from 'components/Title'
@@ -46,9 +47,11 @@ export const MenuPage = () => {
       </header>
 
       <main className={cl.productList}>
-        {filteredProducts.map((product) => (
-          <ProductCard key={product.id} {...product} />
-        ))}
+        <AnimatePresence initial={false}>
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} {...product} />
+          ))}
+        </AnimatePresence>
 
         {search !== '' && filteredProducts.length === 0 && (
           <div className={cl.noProducts}>
