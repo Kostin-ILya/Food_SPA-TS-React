@@ -12,11 +12,10 @@ import { PersistGate } from 'redux-persist/integration/react'
 import {
   CartPage,
   MenuPage,
-  ProductPage,
   SuccessPage,
   LoginPage,
   RegistrationPage,
-  productLoader,
+  ProductPage,
 } from 'pages'
 import { AuthLayout, MainLayout } from 'layouts'
 
@@ -44,12 +43,7 @@ const router = createBrowserRouter(
 
         <Route path="/success" element={<SuccessPage />} />
 
-        <Route
-          path="/product/:id"
-          element={<ProductPage />}
-          loader={productLoader}
-          errorElement={<h1>Page not found</h1>}
-        />
+        <Route path="/product/:id" element={<ProductPage />} />
       </Route>
 
       <Route path="/auth" element={<AuthLayout />}>

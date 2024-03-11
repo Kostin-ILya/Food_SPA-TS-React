@@ -1,5 +1,4 @@
-import { Outlet } from 'react-router-dom'
-
+import { AnimatedOutlet } from 'utils/AnimatedOutlet'
 import { Aside } from './Aside'
 
 import cl from './MainLayout.module.scss'
@@ -11,14 +10,15 @@ export const MainLayout = () => {
     <div className={cl.mainLayout}>
       <Aside />
 
-      <main className={cl.content}>
-        <Outlet />
+      <div className={cl.content}>
+        <AnimatedOutlet />
+
         <footer className={cl.footer}>
           <a href="https://github.com/Kostin-ilya" target="_blank">
             © 2024 Kostin Ilia. Все права защищены.
           </a>
         </footer>
-      </main>
+      </div>
     </div>
   )
 }

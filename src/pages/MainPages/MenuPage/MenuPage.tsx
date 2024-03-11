@@ -13,7 +13,7 @@ import cl from './MenuPage.module.scss'
 export const MenuPage = () => {
   const [products, setProducts] = useState<IProduct[]>([])
   const [search, setSearch] = useState<string>('')
-  const { request, loadingStatus } = useHTTP()
+  const { request, loadingStatus, errorMessage } = useHTTP()
 
   useEffect(() => {
     request<IProduct[]>({
@@ -53,9 +53,15 @@ export const MenuPage = () => {
           ))}
         </AnimatePresence>
 
-        {search !== '' && filteredProducts.length === 0 && (
+        {search !== '' && filteredProducts.length === 0 && !errorMessage && (
           <div className={cl.noProducts}>
             Ничего не найдено, измените запрос
+          </div>
+        )}
+
+        {errorMessage && (
+          <div className={cl.error}>
+            <img src="/images/error.png" alt="error" />
           </div>
         )}
 

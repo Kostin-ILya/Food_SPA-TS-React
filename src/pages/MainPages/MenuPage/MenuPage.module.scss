@@ -25,3 +25,12 @@
   font-size: 18px;
   font-weight: 600;
 }
+
+.error {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
