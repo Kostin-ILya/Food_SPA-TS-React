@@ -19,8 +19,9 @@ export const AnimatedOutlet = () => {
         initial="hidden"
         animate="enter"
         exit="exit"
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4 }}
         variants={pageTransitionVariants}
+        style={{ height: '100%' }}
       >
         {outlet}
       </motion.div>

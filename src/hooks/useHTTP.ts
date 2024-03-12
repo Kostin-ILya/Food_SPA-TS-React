@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import axios from 'axios'
 import { ErrorRes } from 'shared/interfaces/fetch.interface'
@@ -11,6 +11,7 @@ interface IRequestConfig {
   url: string
   method?: HTTPRequestMethods
   body?: string | object | null
+  headers?: object
 }
 
 const useHTTP = () => {
@@ -19,33 +20,32 @@ const useHTTP = () => {
     null
   )
 
-  const request = async <T>({
-    url,
-    method = 'get',
-    body = null,
-  }: IRequestConfig) => {
-    setLoadingStatus('loading')
-    setErrorMessage(null)
+  const request = useCallback(
+    async <T>({ url, method = 'get', body = null }: IRequestConfig) => {
+      setLoadingStatus('loading')
+      setErrorMessage(null)
 
-    try {
-      const { data } = await axios<T>({
-        url,
-        method,
-        data: body,
-      })
+      try {
+        const { data } = await axios<T>({
+          url,
+          method,
+          data: body,
+        })
 
-      setLoadingStatus('idle')
-      return data
-    } catch (error) {
-      setLoadingStatus('error')
-      if (axios.isAxiosError<ErrorRes>(error) && error.response) {
-        setErrorMessage(error.response.data.message)
+        setLoadingStatus('idle')
+        return data
+      } catch (error) {
+        setLoadingStatus('error')
+        if (axios.isAxiosError<ErrorRes>(error) && error.response) {
+          setErrorMessage(error.response.data.message)
 
-        console.log(error.response?.data.message)
+          console.log(error.response?.data.message)
+        }
+        throw error
       }
-      throw error
-    }
-  }
+    },
+    []
+  )
 
   return { request, loadingStatus, errorMessage }
 }

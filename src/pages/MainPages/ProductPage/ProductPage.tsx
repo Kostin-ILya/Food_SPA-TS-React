@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
+import { Grid as Spinner } from 'react-loader-spinner'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 
 import { Button } from 'components/UI/Button'
 import { Rating } from 'components/Rating'
@@ -10,19 +10,38 @@ import { addToCart } from 'store/cart/cartSlice'
 import { useAppDispatch } from 'hooks/redux'
 import { IProduct } from 'shared/interfaces'
 import cl from './ProductPage.module.scss'
+import { useHTTP } from 'hooks/useHTTP'
 
 export const ProductPage = () => {
   const [product, setProduct] = useState<IProduct>({} as IProduct)
+  const { loadingStatus, request } = useHTTP()
   const param = useParams()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    axios.get<IProduct>(`/products/${param.id}`).then((res) => {
-      setProduct(res.data)
+    request<IProduct>({ url: `/products/${param.id}` }).then((res) => {
+      setProduct(res)
     })
-  }, [param.id])
+  }, [param.id, request])
 
   const { id, name, ingredients, price, image, rating } = product
+
+  if (loadingStatus === 'loading') {
+    return (
+      <Spinner
+        color="var(--main-color)"
+        height={150}
+        width={150}
+        wrapperClass={cl.spinner}
+      />
+    )
+  } else if (loadingStatus === 'error') {
+    return (
+      <div className={cl.error}>
+        <img src="/images/error.png" alt="error" />
+      </div>
+    )
+  }
 
   return (
     <>
