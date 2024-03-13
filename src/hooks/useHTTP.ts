@@ -7,11 +7,15 @@ axios.defaults.baseURL = 'https://purpleschool.ru/pizza-api-demo'
 type LoadingStatus = 'idle' | 'loading' | 'error'
 type HTTPRequestMethods = 'get' | 'post'
 
+interface Headers {
+  [key: string]: string
+}
+
 interface IRequestConfig {
   url: string
   method?: HTTPRequestMethods
   body?: string | object | null
-  headers?: object
+  headers?: Headers
 }
 
 const useHTTP = () => {
@@ -21,7 +25,12 @@ const useHTTP = () => {
   )
 
   const request = useCallback(
-    async <T>({ url, method = 'get', body = null }: IRequestConfig) => {
+    async <T>({
+      url,
+      method = 'get',
+      body = null,
+      headers = {},
+    }: IRequestConfig) => {
       setLoadingStatus('loading')
       setErrorMessage(null)
 
@@ -30,6 +39,10 @@ const useHTTP = () => {
           url,
           method,
           data: body,
+          headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+          },
         })
 
         setLoadingStatus('idle')

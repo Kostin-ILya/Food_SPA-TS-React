@@ -1,22 +1,20 @@
-import axios from 'axios'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { useAppSelector } from 'hooks/redux'
+import { useHTTP } from 'hooks/useHTTP'
 
 import { Title } from 'components/Title'
 import { Button } from 'components/UI/Button'
 import { CartItem } from './CartItem'
 
-import { clearCart, getCartItems } from 'store/cart/cartSlice'
+import { getCartItems } from 'store/cart/cartSlice'
 import { getJwt } from 'store/user/userSlice'
 import cl from './CartPage.module.scss'
 
 export const CartPage = () => {
-  const [isSending, setIsSending] = useState(false)
   const items = useAppSelector(getCartItems)
   const jwt = useAppSelector(getJwt)
-  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const { request, loadingStatus } = useHTTP()
 
   const totalCost = items.reduce(
     (acc, item) => acc + item.price * item.count,
@@ -24,22 +22,16 @@ export const CartPage = () => {
   )
 
   const handleSendOrder = () => {
-    setIsSending(true)
-
-    axios
-      .post(
-        '/order',
-        { ...items },
-        {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      )
+    request({
+      url: '/order',
+      method: 'post',
+      body: { ...items },
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
       .then(() => {
         navigate('/success')
-        setIsSending(false)
-        dispatch(clearCart())
       })
       .catch((err) => console.error('Fetch error', err))
   }
@@ -101,7 +93,7 @@ export const CartPage = () => {
           className={cl.buyBtn}
           appearance="big"
           onClick={handleSendOrder}
-          disabled={isSending}
+          disabled={loadingStatus === 'loading'}
         >
           Оформить
         </Button>
