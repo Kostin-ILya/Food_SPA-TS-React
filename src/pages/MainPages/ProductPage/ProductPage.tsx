@@ -91,6 +91,8 @@ export const ProductPage = () => {
           </div>
         </div>
       </main>
+
+      <div className={cl.description}>{product.description}</div>
     </>
   )
 }

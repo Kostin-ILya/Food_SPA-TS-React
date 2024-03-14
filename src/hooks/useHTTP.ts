@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 
 import axios from 'axios'
 import { ErrorRes } from 'shared/interfaces/fetch.interface'
-axios.defaults.baseURL = 'https://purpleschool.ru/pizza-api-demo'
+// axios.defaults.baseURL = 'https://purpleschool.ru/pizza-api-demo'
 
 type LoadingStatus = 'idle' | 'loading' | 'error'
 type HTTPRequestMethods = 'get' | 'post'
@@ -10,13 +10,19 @@ type HTTPRequestMethods = 'get' | 'post'
 interface Headers {
   [key: string]: string
 }
-
 interface IRequestConfig {
   url: string
   method?: HTTPRequestMethods
   body?: string | object | null
   headers?: Headers
 }
+
+const api = axios.create({
+  baseURL: 'https://65fb0bd414650eb210092ef1.mockapi.io/',
+})
+const authApi = axios.create({
+  baseURL: 'https://purpleschool.ru/pizza-api-demo',
+})
 
 const useHTTP = () => {
   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('idle')
@@ -35,7 +41,7 @@ const useHTTP = () => {
       setErrorMessage(null)
 
       try {
-        const { data } = await axios<T>({
+        const { data } = await api<T>({
           url,
           method,
           data: body,
@@ -57,10 +63,11 @@ const useHTTP = () => {
         throw error
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
 
   return { request, loadingStatus, errorMessage }
 }
 
-export { useHTTP }
+export { useHTTP, authApi }

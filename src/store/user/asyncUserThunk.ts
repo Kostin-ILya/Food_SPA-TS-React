@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { authApi } from 'hooks/useHTTP'
 
 import { User, UserAuth, ErrorRes, AuthRes } from 'shared/interfaces'
 import { RootState } from 'store'
@@ -8,7 +9,7 @@ export const loginUser = createAsyncThunk<AuthRes, UserAuth>(
   'user/login',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post<AuthRes>('/auth/login', {
+      const { data } = await authApi.post<AuthRes>('/auth/login', {
         email,
         password,
       })
@@ -27,7 +28,7 @@ export const registerUser = createAsyncThunk<AuthRes, UserAuth>(
   'user/register',
   async ({ email, password, name }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post<AuthRes>('/auth/register', {
+      const { data } = await authApi.post<AuthRes>('/auth/register', {
         email,
         password,
         name,
@@ -47,7 +48,7 @@ export const userProfile = createAsyncThunk<User, void, { state: RootState }>(
   'user/profile',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const { data } = await axios.get<User>('/user/profile', {
+      const { data } = await authApi<User>('/user/profile', {
         headers: { Authorization: `Bearer ${getState().user.jwt}` },
       })
       return data
