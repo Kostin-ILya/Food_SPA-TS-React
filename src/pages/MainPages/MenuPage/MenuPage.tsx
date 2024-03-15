@@ -6,26 +6,42 @@ import { Grid as Spinner } from 'react-loader-spinner'
 import { Title } from 'components/Title'
 import { Search } from 'layouts/MainLayout/Main/Search'
 import { ProductCard } from './ProductCard'
+import { Button } from 'components/UI/Button'
 
 import { IProduct } from 'shared/interfaces'
 import cl from './MenuPage.module.scss'
 
 export const MenuPage = () => {
-  const [products, setProducts] = useState<IProduct[]>([])
-  const [search, setSearch] = useState<string>('')
   const { request, loadingStatus } = useHTTP()
 
+  const [products, setProducts] = useState<IProduct[]>([])
+  const [page, setPage] = useState(1)
+  const [initLoading, setInitLoading] = useState(true)
+  const [showBtn, setShowBtn] = useState(true)
+
+  const [search, setSearch] = useState<string>('')
+
   useEffect(() => {
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const fetchData = () => {
     request<IProduct[]>({
       url: '/products',
+      params: { page, limit: 6 },
     })
       .then((data) => {
-        setProducts(data)
+        setInitLoading(false)
+        data.length < 6 && setShowBtn(false)
+
+        setProducts((prevProducts) => [...prevProducts, ...data])
+        setPage((prevPage) => prevPage + 1)
       })
       .catch((e) => {
         console.log(e)
       })
-  }, [request])
+  }
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
@@ -37,7 +53,7 @@ export const MenuPage = () => {
       product.ingredients.join(' ').toLowerCase().includes(search.toLowerCase())
   )
 
-  if (loadingStatus === 'loading') {
+  if (initLoading && loadingStatus === 'loading') {
     return (
       <Spinner
         color="var(--main-color)"
@@ -74,6 +90,14 @@ export const MenuPage = () => {
           </div>
         )}
       </main>
+
+      {showBtn && !search && (
+        <div className={cl.showMore}>
+          <Button onClick={fetchData} disabled={loadingStatus === 'loading'}>
+            Показать еще
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

@@ -10,11 +10,15 @@ type HTTPRequestMethods = 'get' | 'post'
 interface Headers {
   [key: string]: string
 }
+interface Params {
+  [key: string]: string | number
+}
 interface IRequestConfig {
   url: string
   method?: HTTPRequestMethods
   body?: string | object | null
   headers?: Headers
+  params?: Params
 }
 
 const api = axios.create({
@@ -36,6 +40,7 @@ const useHTTP = () => {
       method = 'get',
       body = null,
       headers = {},
+      params = {},
     }: IRequestConfig) => {
       setLoadingStatus('loading')
       setErrorMessage(null)
@@ -49,6 +54,7 @@ const useHTTP = () => {
             ...headers,
             'Content-Type': 'application/json',
           },
+          params,
         })
 
         setLoadingStatus('idle')
