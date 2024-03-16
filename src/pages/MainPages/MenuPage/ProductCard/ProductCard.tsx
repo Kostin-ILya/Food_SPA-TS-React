@@ -22,6 +22,7 @@ export const ProductCard = ({
 
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+
     dispatch(addToCart({ id, name, price, image }))
   }
   return (

@@ -10,10 +10,21 @@ export interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   appearance?: 'big' | 'withIcon'
   disabled?: boolean
+  animated?: boolean
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, appearance, className, onClick, disabled = false }, ref) => {
+  (
+    {
+      children,
+      appearance,
+      className,
+      onClick,
+      disabled = false,
+      animated = true,
+    },
+    ref
+  ) => {
     const { button, big, withIcon } = cl
 
     return (
@@ -25,8 +36,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onClick}
         disabled={disabled}
         ref={ref}
-        whileTap={{ scale: 0.9 }}
-        whileHover={{ scale: 1.1 }}
+        whileTap={animated ? { scale: 0.9 } : {}}
+        whileHover={animated ? { scale: 1.1 } : {}}
       >
         {children}
       </motion.button>

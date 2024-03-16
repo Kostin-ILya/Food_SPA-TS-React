@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { AnimatedOutlet } from 'utils/AnimatedOutlet'
 
 import cl from './AuthLayout.module.scss'
 
@@ -10,7 +10,7 @@ export const AuthLayout = () => {
       </div>
 
       <div className={cl.content}>
-        <Outlet />
+        <AnimatedOutlet />
       </div>
     </div>
   )
