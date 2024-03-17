@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from 'framer-motion'
-
 import { useLocation, useOutlet } from 'react-router-dom'
 
 const pageTransitionVariants = {
@@ -19,9 +18,9 @@ export const AnimatedOutlet = () => {
         initial="hidden"
         animate="enter"
         exit="exit"
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.7 }}
         variants={pageTransitionVariants}
-        style={{ height: '100%' }}
+        style={{ minHeight: '100%' }}
       >
         {outlet}
       </motion.div>

@@ -17,13 +17,12 @@ export const MenuPage = () => {
   const [products, setProducts] = useState<IProduct[]>([])
   const [page, setPage] = useState(1)
   const [initLoading, setInitLoading] = useState(true)
-  const [showBtn, setShowBtn] = useState(true)
+  const [isShowBtn, setIsShowBtn] = useState(true)
 
   const [search, setSearch] = useState<string>('')
 
   useEffect(() => {
     fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const fetchData = () => {
@@ -33,7 +32,7 @@ export const MenuPage = () => {
     })
       .then((data) => {
         setInitLoading(false)
-        data.length < 6 && setShowBtn(false)
+        data.length < 6 && setIsShowBtn(false)
 
         setProducts((prevProducts) => [...prevProducts, ...data])
         setPage((prevPage) => prevPage + 1)
@@ -55,12 +54,9 @@ export const MenuPage = () => {
 
   if (initLoading && loadingStatus === 'loading') {
     return (
-      <Spinner
-        color="var(--main-color)"
-        height={150}
-        width={150}
-        wrapperClass={cl.spinner}
-      />
+      <div className={cl.spinner}>
+        <Spinner color="var(--main-color)" height={150} width={150} />
+      </div>
     )
   } else if (loadingStatus === 'error') {
     return (
@@ -74,6 +70,7 @@ export const MenuPage = () => {
     <div className={cl.menuPage}>
       <header className={cl.header}>
         <Title>Меню</Title>
+
         <Search search={search} setSearch={handleSearch} />
       </header>
 
@@ -91,7 +88,7 @@ export const MenuPage = () => {
         )}
       </main>
 
-      {showBtn && !search && (
+      {isShowBtn && !search && (
         <div className={cl.showMore}>
           <Button onClick={fetchData} disabled={loadingStatus === 'loading'}>
             Показать еще

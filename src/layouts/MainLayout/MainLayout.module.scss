@@ -1,6 +1,5 @@
 .mainLayout {
   display: flex;
-
   position: relative;
   max-width: 1140px;
   margin: 0 auto;
@@ -12,7 +11,9 @@
 
 .content {
   width: 100%;
+  min-height: 100vh;
   padding: 40px 60px;
+  padding-bottom: 80px;
   position: relative;
 }
 
@@ -27,5 +28,49 @@
     color: rgb(204 84 51);
     font-size: 13px;
     font-weight: 600;
+  }
+}
+
+.menuBtn {
+  display: none;
+  width: 30px;
+  height: 30px;
+  color: var(--main-color);
+  position: absolute;
+  top: 50px;
+  left: 15px;
+  cursor: pointer;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+@media (max-width: 1199px) {
+  .mainLayout {
+    max-width: 960px;
+  }
+
+  .content {
+    padding: 40px 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .mainLayout {
+    max-width: 720px;
+  }
+  .overlay {
+    display: block;
+  }
+  .menuBtn {
+    display: block;
   }
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Grid as Spinner } from 'react-loader-spinner'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { useHTTP } from 'hooks/useHTTP'
+import { IoChevronBackCircleOutline as Back } from 'react-icons/io5'
 
 import { Button } from 'components/UI/Button'
 import { Rating } from 'components/Rating'
@@ -10,7 +12,6 @@ import { addToCart } from 'store/cart/cartSlice'
 import { useAppDispatch } from 'hooks/redux'
 import { IProduct } from 'shared/interfaces'
 import cl from './ProductPage.module.scss'
-import { useHTTP } from 'hooks/useHTTP'
 
 export const ProductPage = () => {
   const [product, setProduct] = useState<IProduct>({} as IProduct)
@@ -28,12 +29,9 @@ export const ProductPage = () => {
 
   if (loadingStatus === 'loading') {
     return (
-      <Spinner
-        color="var(--main-color)"
-        height={150}
-        width={150}
-        wrapperClass={cl.spinner}
-      />
+      <div className={cl.spinner}>
+        <Spinner color="var(--main-color)" height={150} width={150} />
+      </div>
     )
   } else if (loadingStatus === 'error') {
     return (
@@ -47,21 +45,28 @@ export const ProductPage = () => {
     <>
       <header className={cl.header}>
         <Title>{name}</Title>
-        <Button
-          appearance="withIcon"
-          onClick={() =>
-            dispatch(
-              addToCart({
-                id,
-                name,
-                price,
-                image,
-              })
-            )
-          }
-        >
-          <img src="/icons/cart_icon.svg" alt="cart" />В корзину
-        </Button>
+
+        <div className={cl.buttons}>
+          <Link to="/" className={cl.back}>
+            <Back />
+          </Link>
+
+          <Button
+            appearance="withIcon"
+            onClick={() =>
+              dispatch(
+                addToCart({
+                  id,
+                  name,
+                  price,
+                  image,
+                })
+              )
+            }
+          >
+            <img src="/icons/cart_icon.svg" alt="cart" />В корзину
+          </Button>
+        </div>
       </header>
 
       <main className={cl.product}>

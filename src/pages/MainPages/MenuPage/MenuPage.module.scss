@@ -6,17 +6,18 @@
 
 .productList {
   padding-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 40px;
-  justify-items: center;
+  justify-content: space-around;
 }
 
 .spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .noProducts {
@@ -41,4 +42,20 @@
   margin-top: 50px;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 1199px) {
+  .productList {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .header {
+    padding-left: 70px;
+  }
+
+  .productList {
+    padding-top: 35px;
+  }
 }

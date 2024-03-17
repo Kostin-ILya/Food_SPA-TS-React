@@ -1,3 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .back {
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      color: var(--main-color);
+      transition: 0.3s all;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
 .cartPage {
   padding-top: 50px;
   width: 520px;
@@ -8,6 +31,10 @@
   gap: 30px;
   justify-content: center;
   align-items: center;
+}
+
+.emptyCartPage {
+  min-height: 100vh;
 }
 
 .empty {
@@ -90,6 +117,10 @@
   }
 }
 
+.buyBtn {
+  margin-bottom: 50px;
+}
+
 .modal {
   width: 350px;
 
@@ -124,4 +155,10 @@
 
 .promoApplied {
   color: red;
+}
+
+@media (max-width: 991px) {
+  .title {
+    padding-left: 70px;
+  }
 }

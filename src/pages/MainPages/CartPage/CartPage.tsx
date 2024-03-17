@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'hooks/redux'
 import { useHTTP } from 'hooks/useHTTP'
+import { IoChevronBackCircleOutline as Back } from 'react-icons/io5'
 import Modal from 'react-modal'
 
 import { Title } from 'components/Title'
@@ -54,18 +55,23 @@ export const CartPage = () => {
 
   if (!items.length) {
     return (
-      <>
+      <div className={cl.emptyCartPage}>
         <Title>Корзина</Title>
         <div className={cl.empty}>
           <Title>Корзина пуста</Title>
         </div>
-      </>
+      </div>
     )
   }
 
   return (
     <>
-      <Title>Корзина</Title>
+      <header className={cl.header}>
+        <Title className={cl.title}>Корзина</Title>
+        <Link to="/" className={cl.back}>
+          <Back />
+        </Link>
+      </header>
 
       <main className={cl.cartPage}>
         <div className={cl.cartList}>

@@ -1,8 +1,37 @@
 .aside {
   width: 240px;
-  // height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 30px;
   border-right: 1px solid rgb(212, 214, 224);
+  position: relative;
+}
+
+.exit {
+  display: none;
+  cursor: pointer;
+  width: 30px;
+}
+
+@media (max-width: 991px) {
+  .aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+    background-color: white;
+    transform: translateX(-100%);
+    transition: 0.3s all;
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  .exit {
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
 }

@@ -69,10 +69,11 @@
 }
 
 .spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .error {
@@ -91,4 +92,31 @@
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0.5px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.back {
+  display: flex;
+  svg {
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    color: var(--main-color);
+    transition: 0.3s all;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .header {
+    padding-left: 70px;
+  }
 }

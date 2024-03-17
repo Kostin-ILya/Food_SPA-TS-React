@@ -1,15 +1,22 @@
-import cl from './Aside.module.scss'
+import clsx from 'clsx'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from 'hooks/redux'
 
 import { Button } from 'components/UI/Button'
 import { UserProfile } from 'layouts/MainLayout/Aside/UserProfile'
 import { Navigation } from 'layouts/MainLayout/Aside/Navigation'
-import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from 'hooks/redux'
-import { getFetchStatus, getUserInfo, logout } from 'store/user/userSlice'
-import { useEffect } from 'react'
-import { userProfile } from 'store/user/asyncUserThunk'
 
-export const Aside = () => {
+import { getFetchStatus, getUserInfo, logout } from 'store/user/userSlice'
+import { userProfile } from 'store/user/asyncUserThunk'
+import cl from './Aside.module.scss'
+
+interface AsideProps {
+  isMenuOpen: boolean
+  handleClose: () => void
+}
+
+export const Aside = ({ isMenuOpen, handleClose }: AsideProps) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { email, name } = useAppSelector(getUserInfo)
@@ -19,7 +26,7 @@ export const Aside = () => {
     dispatch(userProfile())
       .unwrap()
       .catch((err) => console.error('Fetch error', err))
-  }, [dispatch])
+  }, [])
 
   const handleLogout = () => {
     dispatch(logout())
@@ -27,8 +34,15 @@ export const Aside = () => {
   }
 
   return (
-    <aside className={cl.aside}>
+    <aside className={clsx(cl.aside, { [cl.open]: isMenuOpen })}>
       {<UserProfile name={name} email={email} isLoading={isLoading} />}
+
+      <img
+        className={cl.exit}
+        onClick={handleClose}
+        src="/icons/delete_icon.svg"
+        alt="exit"
+      />
 
       <Navigation />
 
