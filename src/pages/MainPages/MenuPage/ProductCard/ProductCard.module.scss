@@ -77,3 +77,30 @@
     width: 310px;
   }
 }
+
+@media (max-width: 767px) {
+  .card {
+    width: 243px;
+    height: auto;
+  }
+
+  .info {
+    padding-left: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+@media (max-width: 575px) {
+  .card {
+    width: 100%;
+  }
+
+  .info {
+    h3 {
+      font-size: 16px;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+}

@@ -2,11 +2,9 @@ import { useCallback, useState } from 'react'
 
 import axios from 'axios'
 import { ErrorRes } from 'shared/interfaces/fetch.interface'
-// axios.defaults.baseURL = 'https://purpleschool.ru/pizza-api-demo'
 
 type LoadingStatus = 'idle' | 'loading' | 'error'
 type HTTPRequestMethods = 'get' | 'post'
-
 interface Headers {
   [key: string]: string
 }
@@ -27,12 +25,14 @@ const api = axios.create({
 const authApi = axios.create({
   baseURL: 'https://purpleschool.ru/pizza-api-demo',
 })
+// axios.defaults.baseURL = 'https://purpleschool.ru/pizza-api-demo'
 
-const useHTTP = () => {
+const useHTTP = (axiosInstance: 'api' | 'authApi' = 'api') => {
   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('idle')
   const [errorMessage, setErrorMessage] = useState<string | string[] | null>(
     null
   )
+  const requestApi = axiosInstance === 'api' ? api : authApi
 
   const request = useCallback(
     async <T>({
@@ -46,7 +46,7 @@ const useHTTP = () => {
       setErrorMessage(null)
 
       try {
-        const { data } = await api<T>({
+        const { data } = await requestApi<T>({
           url,
           method,
           data: body,

@@ -12,7 +12,7 @@
 .content {
   width: 100%;
   min-height: 100vh;
-  padding: 40px 60px;
+  padding: 40px 60px 80px;
   padding-bottom: 80px;
   position: relative;
 }
@@ -22,11 +22,11 @@
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
+  font-size: 13px;
 
   a {
     text-decoration: none;
     color: rgb(204 84 51);
-    font-size: 13px;
     font-weight: 600;
   }
 }
@@ -59,7 +59,7 @@
   }
 
   .content {
-    padding: 40px 30px;
+    padding: 40px 30px 80px;
   }
 }
 
@@ -72,5 +72,31 @@
   }
   .menuBtn {
     display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .mainLayout {
+    max-width: 540px;
+  }
+
+  .content {
+    padding: 40px 15px 60px;
+  }
+}
+
+@media (max-width: 575px) {
+  .mainLayout {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .menuBtn {
+    top: 15px;
+    left: 0px;
+  }
+
+  .footer {
+    font-size: 7px;
   }
 }

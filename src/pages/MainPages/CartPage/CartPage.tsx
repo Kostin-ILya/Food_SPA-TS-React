@@ -17,7 +17,7 @@ export const CartPage = () => {
   const items = useAppSelector(getCartItems)
   const jwt = useAppSelector(getJwt)
   const navigate = useNavigate()
-  const { request, loadingStatus } = useHTTP()
+  const { request, loadingStatus } = useHTTP('authApi')
 
   const promoRef = useRef<HTMLInputElement>(null)
   const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -56,7 +56,7 @@ export const CartPage = () => {
   if (!items.length) {
     return (
       <div className={cl.emptyCartPage}>
-        <Title>Корзина</Title>
+        <Title className={cl.title}>Корзина</Title>
         <div className={cl.empty}>
           <Title>Корзина пуста</Title>
         </div>

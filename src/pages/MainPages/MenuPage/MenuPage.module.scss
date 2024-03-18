@@ -27,6 +27,7 @@
   transform: translate(-50%, -50%);
   font-size: 18px;
   font-weight: 600;
+  text-align: center;
 }
 
 .error {
@@ -57,5 +58,29 @@
 
   .productList {
     padding-top: 35px;
+  }
+}
+
+@media (max-width: 767px) {
+  .productList {
+    gap: 20px;
+  }
+  .noProducts {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 575px) {
+  .header {
+    padding-left: 0;
+    flex-direction: column;
+    row-gap: 15px;
+  }
+
+  .productList {
+    padding-top: 25px;
+  }
+  .noProducts {
+    font-size: 12px;
   }
 }

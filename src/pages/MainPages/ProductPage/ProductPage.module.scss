@@ -12,11 +12,9 @@
 
 .image {
   border-radius: 10px;
-  width: fit-content;
+  width: 325px;
   height: fit-content;
   box-shadow: 18.21px 18.21px 36.43px 0px rgba(211, 209, 216, 0.25);
-  width: 325px;
-  height: 170px;
 }
 
 .info {
@@ -92,6 +90,7 @@
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0.5px;
+  hyphens: auto;
 }
 
 .buttons {
@@ -118,5 +117,58 @@
 @media (max-width: 991px) {
   .header {
     padding-left: 70px;
+  }
+}
+
+@media (max-width: 767px) {
+  .product {
+    flex-direction: column;
+    row-gap: 30px;
+    column-gap: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .image {
+    width: 70%;
+  }
+  .info {
+    row-gap: 15px;
+  }
+  .description {
+    font-size: 16px;
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 575px) {
+  .header {
+    padding-left: 0;
+    flex-direction: column;
+    row-gap: 15px;
+  }
+
+  .product {
+    padding-top: 20px;
+  }
+
+  .buttons {
+    button {
+      width: auto;
+      span {
+        display: none;
+      }
+    }
+  }
+
+  .image {
+    width: 100%;
+  }
+  .info {
+    width: 100%;
+  }
+  .description {
+    font-size: 14px;
+    padding: 0;
+    margin-top: 20px;
   }
 }

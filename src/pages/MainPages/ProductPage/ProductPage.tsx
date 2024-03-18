@@ -64,7 +64,8 @@ export const ProductPage = () => {
               )
             }
           >
-            <img src="/icons/cart_icon.svg" alt="cart" />В корзину
+            <img src="/icons/cart_icon.svg" alt="cart" />
+            <span>В корзину</span>
           </Button>
         </div>
       </header>
@@ -97,7 +98,9 @@ export const ProductPage = () => {
         </div>
       </main>
 
-      <div className={cl.description}>{product.description}</div>
+      <div className={cl.description} lang="ru">
+        {product.description}
+      </div>
     </>
   )
 }

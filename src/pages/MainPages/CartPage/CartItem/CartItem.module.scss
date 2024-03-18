@@ -88,3 +88,22 @@
     }
   }
 }
+
+@media (max-width: 575px) {
+  .cartItem {
+    font-size: 13px;
+    flex-direction: column;
+    row-gap: 10px;
+
+    .content {
+      gap: 10px;
+      width: 100%;
+    }
+
+    .info {
+      h3 {
+        font-size: 14px;
+      }
+    }
+  }
+}

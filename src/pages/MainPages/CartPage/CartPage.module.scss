@@ -25,7 +25,6 @@
   padding-top: 50px;
   width: 520px;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -160,5 +159,48 @@
 @media (max-width: 991px) {
   .title {
     padding-left: 70px;
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    padding-left: 50px;
+  }
+  .cartPage {
+    width: 90%;
+  }
+}
+
+@media (max-width: 575px) {
+  .cartPage {
+    width: 100%;
+    padding-top: 30px;
+  }
+
+  .promo {
+    margin-top: 20px;
+    input {
+      padding-right: 115px;
+    }
+    button {
+      width: 100px;
+      height: 30px;
+      padding: 0;
+      right: 10px;
+      font-size: 13px;
+    }
+  }
+  .summary {
+    margin-top: 20px;
+  }
+
+  .buyBtn {
+    margin: 20px auto;
+    min-width: 200px;
+  }
+
+  .modal {
+    width: 280px;
+    padding: 10px;
   }
 }
