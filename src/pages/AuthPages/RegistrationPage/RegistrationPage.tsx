@@ -45,7 +45,7 @@ export const RegistrationPage = () => {
       <form className={cl.form} onSubmit={handleSubmit}>
         <InputWithLabel
           name="email"
-          // type="email"
+          type="email"
           placeholder="Email"
           ref={firstInputRef}
         >

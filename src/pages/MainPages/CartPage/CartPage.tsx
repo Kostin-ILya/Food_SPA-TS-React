@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'hooks/redux'
 import { useHTTP } from 'hooks/useHTTP'
 import { IoChevronBackCircleOutline as Back } from 'react-icons/io5'
+import { AnimatePresence } from 'framer-motion'
 import Modal from 'react-modal'
 
 import { Title } from 'components/Title'
@@ -75,9 +76,11 @@ export const CartPage = () => {
 
       <main className={cl.cartPage}>
         <div className={cl.cartList}>
-          {items.map((item) => (
-            <CartItem key={item.id} {...item} />
-          ))}
+          <AnimatePresence initial={false}>
+            {items.map((item) => (
+              <CartItem key={item.id} {...item} />
+            ))}
+          </AnimatePresence>
         </div>
 
         <div className={cl.promo}>

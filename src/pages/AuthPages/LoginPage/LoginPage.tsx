@@ -44,7 +44,12 @@ export const LoginPage = () => {
       <Title>Вход</Title>
 
       <form className={cl.form} onSubmit={handleSubmit}>
-        <InputWithLabel name="email" placeholder="Email" ref={firstInputRef}>
+        <InputWithLabel
+          name="email"
+          placeholder="Email"
+          ref={firstInputRef}
+          type="email"
+        >
           Ваш email
         </InputWithLabel>
 

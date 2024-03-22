@@ -1,5 +1,7 @@
 import { CartItem as TCartItem } from 'shared/interfaces/'
 import { useAppDispatch } from 'hooks/redux'
+import { motion } from 'framer-motion'
+
 import {
   decreaseCount,
   increaseCount,
@@ -13,7 +15,11 @@ export const CartItem = ({ id, name, price, image, count }: CartItemProps) => {
   const dispatch = useAppDispatch()
 
   return (
-    <div className={cl.cartItem}>
+    <motion.div
+      className={cl.cartItem}
+      exit={{ opacity: 0, x: 100 }}
+      transition={{ duration: 0.7 }}
+    >
       <div className={cl.content}>
         <div className={cl.imgContainer}>
           <img src={image} alt={name} />
@@ -46,6 +52,6 @@ export const CartItem = ({ id, name, price, image, count }: CartItemProps) => {
           alt="delete"
         />
       </div>
-    </div>
+    </motion.div>
   )
 }
