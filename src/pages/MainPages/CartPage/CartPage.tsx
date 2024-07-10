@@ -58,9 +58,8 @@ export const CartPage = () => {
     return (
       <div className={cl.emptyCartPage}>
         <Title className={cl.title}>Корзина</Title>
-        <div className={cl.empty}>
-          <Title>Корзина пуста</Title>
-        </div>
+
+        <Title className={cl.empty}>Корзина пуста</Title>
       </div>
     )
   }

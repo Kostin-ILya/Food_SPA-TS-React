@@ -20,7 +20,6 @@ export const AnimatedOutlet = () => {
         exit="exit"
         transition={{ duration: 0.7 }}
         variants={pageTransitionVariants}
-        style={{ minHeight: '100%' }}
       >
         {outlet}
       </motion.div>
