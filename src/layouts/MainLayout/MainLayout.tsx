@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { FiMenu as MenuBtn } from 'react-icons/fi'
 import clsx from 'clsx'
 
@@ -39,23 +39,27 @@ export const MainLayout = () => {
 
   return (
     <div className={clsx(cl.mainLayout)}>
-      <Aside isMenuOpen={isMenuOpen} handleClose={handleClose} />
-      {isMenuOpen && <div className={cl.overlay} onClick={handleClose} />}
+      <Suspense fallback={null}>
+        <Aside isMenuOpen={isMenuOpen} handleClose={handleClose} />
+        {isMenuOpen && <div className={cl.overlay} onClick={handleClose} />}
 
-      <div className={cl.content}>
-        <AnimatedOutlet />
+        <div className={cl.content}>
+          <AnimatedOutlet />
 
-        <MenuBtn
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={cl.menuBtn}
-        />
+          <MenuBtn
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className={cl.menuBtn}
+          />
 
-        <footer className={cl.footer}>
-          <a href="https://github.com/Kostin-ilya" target="_blank">
-            © 2024 Kostin Ilia. Все права защищены.
-          </a>
-        </footer>
-      </div>
+          <footer className={cl.footer}>
+            <a href="https://github.com/Kostin-ilya" target="_blank">
+              © 2024 Kostin Ilia. Все права защищены.
+            </a>
+          </footer>
+        </div>
+      </Suspense>
     </div>
   )
 }
+
+export default MainLayout
