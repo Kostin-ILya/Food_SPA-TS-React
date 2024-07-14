@@ -1,9 +1,9 @@
 .navigation {
-  padding-top: 50px;
+  padding-top: 150px;
   flex-grow: 1; //можно задать кнопке margin-top:auto
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 50px;
 }
 
 .link {
@@ -13,6 +13,7 @@
   color: black;
   font-size: 18px;
   font-weight: 500;
+  transition: 0.3s all;
   &:hover {
     color: var(--main-color-hover);
   }
@@ -21,6 +22,7 @@
 .active {
   color: var(--main-color);
   font-weight: 700;
+  transform: translate3d(5px, 0, 0);
 }
 
 .count {
@@ -33,4 +35,9 @@
   background-color: var(--main-color);
   color: white;
   font-size: 12px;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
 }

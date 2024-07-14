@@ -1,10 +1,12 @@
 import { NavLink } from 'react-router-dom'
-
+import { GiFullPizza } from 'react-icons/gi'
+import { FaShoppingCart } from 'react-icons/fa'
 import clsx from 'clsx'
 
-import cl from './Navigation.module.scss'
 import { useAppSelector } from 'hooks/redux'
 import { getCartItems } from 'store/cart/cartSlice'
+
+import cl from './Navigation.module.scss'
 
 export const Navigation = () => {
   const cartItems = useAppSelector(getCartItems)
@@ -13,9 +15,14 @@ export const Navigation = () => {
     <nav className={cl.navigation}>
       <NavLink
         to="/"
-        className={({ isActive }) => clsx(cl.link, isActive && cl.active)}
+        className={({ isActive }) =>
+          clsx(
+            cl.link,
+            (isActive || location.pathname.includes('product')) && cl.active
+          )
+        }
       >
-        <img src="/icons/menu_icon.svg" alt="menu" />
+        <GiFullPizza className={cl.icon} />
         Меню
       </NavLink>
 
@@ -23,7 +30,7 @@ export const Navigation = () => {
         to="/cart"
         className={({ isActive }) => clsx(cl.link, isActive && cl.active)}
       >
-        <img src="/icons/cart_navigate_icon.svg" alt="cart" />
+        <FaShoppingCart className={cl.icon} />
         Корзина
         {cartItems.length > 0 && (
           <span className={cl.count}>
