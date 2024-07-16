@@ -3,6 +3,7 @@ import { Grid as Spinner } from 'react-loader-spinner'
 import { Link, useParams } from 'react-router-dom'
 import { useHTTP } from 'hooks/useHTTP'
 import { IoChevronBackCircleOutline as Back } from 'react-icons/io5'
+import { Helmet } from 'react-helmet'
 
 import { Button } from 'components/UI/Button'
 import { Rating } from 'components/Rating'
@@ -43,6 +44,10 @@ export const ProductPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{name}</title>
+      </Helmet>
+
       <header className={cl.header}>
         <Title>{name}</Title>
 

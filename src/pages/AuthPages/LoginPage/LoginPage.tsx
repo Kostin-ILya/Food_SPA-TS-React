@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from 'hooks/redux'
+import { Helmet } from 'react-helmet'
 
 import { Title } from 'components/Title'
 import { InputWithLabel } from 'components/UI/Input/InputWithLabel'
@@ -40,35 +41,41 @@ export const LoginPage = () => {
   }
 
   return (
-    <div className={cl.login}>
-      <Title>Вход</Title>
+    <>
+      <Helmet>
+        <title>Delicious restaurant</title>
+      </Helmet>
 
-      <form className={cl.form} onSubmit={handleSubmit}>
-        <InputWithLabel
-          name="email"
-          placeholder="Email"
-          ref={firstInputRef}
-          type="email"
-        >
-          Ваш email
-        </InputWithLabel>
+      <div className={cl.login}>
+        <Title>Вход</Title>
 
-        <InputWithLabel name="password" type="password" placeholder="Пароль">
-          Ваш пароль
-        </InputWithLabel>
+        <form className={cl.form} onSubmit={handleSubmit}>
+          <InputWithLabel
+            name="email"
+            placeholder="Email"
+            ref={firstInputRef}
+            type="email"
+          >
+            Ваш email
+          </InputWithLabel>
 
-        {errorMsg && <div className={cl.error}>{errorMsg}</div>}
+          <InputWithLabel name="password" type="password" placeholder="Пароль">
+            Ваш пароль
+          </InputWithLabel>
 
-        <Button appearance="big" disabled={isLoading}>
-          Вход
-        </Button>
-      </form>
+          {errorMsg && <div className={cl.error}>{errorMsg}</div>}
 
-      <div className={cl.reg}>
-        <span>Нет акканута?</span>
-        <Link to="/auth/register">Зарегистрироваться</Link>
+          <Button appearance="big" disabled={isLoading}>
+            Вход
+          </Button>
+        </form>
+
+        <div className={cl.reg}>
+          <span>Нет акканута?</span>
+          <Link to="/auth/register">Зарегистрироваться</Link>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

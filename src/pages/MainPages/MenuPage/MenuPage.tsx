@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useHTTP } from 'hooks/useHTTP'
 import { AnimatePresence } from 'framer-motion'
-
 import { Grid as Spinner } from 'react-loader-spinner'
+import { Helmet } from 'react-helmet'
+
 import { Title } from 'components/Title'
 import { Search } from 'layouts/MainLayout/Main/Search'
 import { ProductCard } from './ProductCard'
@@ -67,35 +68,41 @@ export const MenuPage = () => {
   }
 
   return (
-    <div className={cl.menuPage}>
-      <header className={cl.header}>
-        <Title>Меню</Title>
+    <>
+      <Helmet>
+        <title>Delicious restaurant</title>
+      </Helmet>
 
-        <Search search={search} setSearch={handleSearch} />
-      </header>
+      <div className={cl.menuPage}>
+        <header className={cl.header}>
+          <Title>Меню</Title>
 
-      <main className={cl.productList}>
-        <AnimatePresence initial={false}>
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} {...product} />
-          ))}
-        </AnimatePresence>
+          <Search search={search} setSearch={handleSearch} />
+        </header>
 
-        {search !== '' && filteredProducts.length === 0 && (
-          <div className={cl.noProducts}>
-            Ничего не найдено, измените запрос
+        <main className={cl.productList}>
+          <AnimatePresence initial={false}>
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} {...product} />
+            ))}
+          </AnimatePresence>
+
+          {search !== '' && filteredProducts.length === 0 && (
+            <div className={cl.noProducts}>
+              Ничего не найдено, измените запрос
+            </div>
+          )}
+        </main>
+
+        {isShowBtn && !search && (
+          <div className={cl.showMore}>
+            <Button onClick={fetchData} disabled={loadingStatus === 'loading'}>
+              Показать еще
+            </Button>
           </div>
         )}
-      </main>
-
-      {isShowBtn && !search && (
-        <div className={cl.showMore}>
-          <Button onClick={fetchData} disabled={loadingStatus === 'loading'}>
-            Показать еще
-          </Button>
-        </div>
-      )}
-    </div>
+      </div>
+    </>
   )
 }
 

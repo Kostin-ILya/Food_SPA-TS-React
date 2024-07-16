@@ -4,6 +4,7 @@ import { useAppSelector } from 'hooks/redux'
 import { useHTTP } from 'hooks/useHTTP'
 import { IoChevronBackCircleOutline as Back } from 'react-icons/io5'
 import { AnimatePresence } from 'framer-motion'
+import { Helmet } from 'react-helmet'
 import Modal from 'react-modal'
 
 import { Title } from 'components/Title'
@@ -54,94 +55,100 @@ export const CartPage = () => {
     }
   }
 
-  if (!items.length) {
-    return (
-      <div className={cl.emptyCartPage}>
-        <Title className={cl.title}>Корзина</Title>
-
-        <Title className={cl.empty}>Корзина пуста</Title>
-      </div>
-    )
-  }
-
   return (
     <>
-      <header className={cl.header}>
-        <Title className={cl.title}>Корзина</Title>
-        <Link to="/" className={cl.back}>
-          <Back />
-        </Link>
-      </header>
+      <Helmet>
+        <title>Корзина</title>
+      </Helmet>
 
-      <main className={cl.cartPage}>
-        <div className={cl.cartList}>
-          <AnimatePresence initial={false}>
-            {items.map((item) => (
-              <CartItem key={item.id} {...item} />
-            ))}
-          </AnimatePresence>
+      {!items.length ? (
+        <div className={cl.emptyCartPage}>
+          <Title className={cl.title}>Корзина</Title>
+
+          <Title className={cl.empty}>Корзина пуста</Title>
         </div>
+      ) : (
+        <>
+          <header className={cl.header}>
+            <Title className={cl.title}>Корзина</Title>
+            <Link to="/" className={cl.back}>
+              <Back />
+            </Link>
+          </header>
 
-        <div className={cl.promo}>
-          <input ref={promoRef} type="text" placeholder="Промокод" />
-          <Button onClick={() => handlePromo()} animated={false}>
-            Применить
-          </Button>
-        </div>
-
-        <div className={cl.summary}>
-          <div>
-            <span>Итог</span>
-            <div>
-              {totalCost} <span className={cl.ruble}>₽</span>
+          <main className={cl.cartPage}>
+            <div className={cl.cartList}>
+              <AnimatePresence initial={false}>
+                {items.map((item) => (
+                  <CartItem key={item.id} {...item} />
+                ))}
+              </AnimatePresence>
             </div>
-          </div>
-          <div>
-            <span>Доставка</span>
-            <div>
-              290 <span className={cl.ruble}>₽</span>
-            </div>
-          </div>
-          <div>
-            <span>
-              Общая стоимость &nbsp;
-              <span className={cl.count}>
-                ({items.reduce((acc, item) => acc + item.count, 0)}шт.)
-              </span>
-              {isPromo && (
-                <span className={cl.promoApplied}>&nbsp;-15% (промокод)</span>
-              )}
-            </span>
-            <div>
-              {!isPromo ? totalCost + 290 : totalCost * 0.85}
-              <span className={cl.ruble}>&nbsp;₽</span>
-            </div>
-          </div>
-        </div>
 
-        <Button
-          className={cl.buyBtn}
-          appearance="big"
-          onClick={handleSendOrder}
-          disabled={loadingStatus === 'loading'}
-        >
-          Оформить
-        </Button>
-      </main>
+            <div className={cl.promo}>
+              <input ref={promoRef} type="text" placeholder="Промокод" />
+              <Button onClick={() => handlePromo()} animated={false}>
+                Применить
+              </Button>
+            </div>
 
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        contentLabel="Modal"
-        className={cl.modal}
-        overlayClassName={cl.overlay}
-        bodyOpenClassName={null}
-      >
-        <div className={cl.modal}>
-          <Title>Промокод применен</Title>
-          <Button onClick={() => setModalIsOpen(false)}>Закрыть</Button>
-        </div>
-      </Modal>
+            <div className={cl.summary}>
+              <div>
+                <span>Итог</span>
+                <div>
+                  {totalCost} <span className={cl.ruble}>₽</span>
+                </div>
+              </div>
+              <div>
+                <span>Доставка</span>
+                <div>
+                  290 <span className={cl.ruble}>₽</span>
+                </div>
+              </div>
+              <div>
+                <span>
+                  Общая стоимость &nbsp;
+                  <span className={cl.count}>
+                    ({items.reduce((acc, item) => acc + item.count, 0)}шт.)
+                  </span>
+                  {isPromo && (
+                    <span className={cl.promoApplied}>
+                      &nbsp;-15% (промокод)
+                    </span>
+                  )}
+                </span>
+                <div>
+                  {!isPromo ? totalCost + 290 : totalCost * 0.85}
+                  <span className={cl.ruble}>&nbsp;₽</span>
+                </div>
+              </div>
+            </div>
+
+            <Button
+              className={cl.buyBtn}
+              appearance="big"
+              onClick={handleSendOrder}
+              disabled={loadingStatus === 'loading'}
+            >
+              Оформить
+            </Button>
+          </main>
+
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
+            contentLabel="Modal"
+            className={cl.modal}
+            overlayClassName={cl.overlay}
+            bodyOpenClassName={null}
+          >
+            <div className={cl.modal}>
+              <Title>Промокод применен</Title>
+              <Button onClick={() => setModalIsOpen(false)}>Закрыть</Button>
+            </div>
+          </Modal>
+        </>
+      )}
     </>
   )
 }
