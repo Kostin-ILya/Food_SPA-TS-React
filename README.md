@@ -1,30 +1,38 @@
-# React + TypeScript + Vite
+# Delicious restaurant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A restaurant web application offering a variety of dishes. Users can browse the
+menu, search for specific dishes, and add them to the cart. Features include
+user registration and authorization, applying promo codes during checkout, and a
+responsive, user-friendly interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Dynamic routing with **React Router v6.4** for seamless navigation.
+- State management using **Redux Toolkit** with persistent storage via **Redux
+  Persist**.
+- Type-safe codebase with **TypeScript** for improved reliability.
+- Form validation using **React Hook Form** for better user input handling.
+- User authentication and authorization with **JWT tokens** for secure access.
+- Asynchronous data fetching and API integration with **Axios**.
+- Pagination and search functionality for better data accessibility.
+- Responsive design built with **CSS Modules** and **SCSS**, optimized for all
+  devices.
+- Smooth animations powered by **Framer Motion**.
+- Lazy-loaded components using **React.lazy** for improved performance.
+- Comprehensive unit tests written with **Jest** and **React Testing Library**.
+- SEO enhancements with **React Helmet**.
+- Deployed on **Vercel** for fast and reliable hosting.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend:** React (Hooks), TypeScript
+- **State Management:** Redux Toolkit, Redux Persist
+- **Routing:** React Router v6.4
+- **Styling:** SCSS, CSS Modules
+- **API Integration:** Axios
+- **Testing:** Jest, React Testing Library
+- **Animations:** Framer Motion
+- **Build Tool:** Vite
+- **Deployment:** Vercel
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Feel free to explore and contribute!
