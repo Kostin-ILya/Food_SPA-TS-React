@@ -14,7 +14,6 @@ import store from 'store'
 import { persistor } from 'store'
 import { RequiredAuth } from 'utils/RequiredAuth'
 
-// import { AuthLayout, MainLayout } from 'layouts'
 import 'styles/reset.css'
 import 'styles/main.scss'
 

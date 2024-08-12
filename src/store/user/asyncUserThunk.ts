@@ -1,25 +1,29 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 import { authApi } from 'hooks/useHTTP'
 
 import { User, UserAuth, ErrorRes, AuthRes } from 'shared/interfaces'
 import { RootState } from 'store'
 
+const handleFetchError = (error: unknown) => {
+  if (axios.isAxiosError<ErrorRes>(error) && error.response) {
+    return error.response.data.message
+  }
+  return error
+}
+
 export const loginUser = createAsyncThunk<AuthRes, UserAuth>(
   'user/login',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const { data } = await authApi.post<AuthRes>('/auth/login', {
+      const { data } = await authApi.post('/auth/login', {
         email,
         password,
       })
 
       return data
     } catch (error) {
-      if (axios.isAxiosError<ErrorRes>(error) && error.response) {
-        return rejectWithValue(error.response.data.message)
-      }
-      return rejectWithValue(error)
+      return rejectWithValue(handleFetchError(error))
     }
   }
 )
@@ -36,10 +40,7 @@ export const registerUser = createAsyncThunk<AuthRes, UserAuth>(
 
       return data
     } catch (error) {
-      if (axios.isAxiosError<ErrorRes>(error) && error.response) {
-        return rejectWithValue(error.response.data.message)
-      }
-      return rejectWithValue(error)
+      return rejectWithValue(handleFetchError(error))
     }
   }
 )
@@ -53,10 +54,7 @@ export const userProfile = createAsyncThunk<User, void, { state: RootState }>(
       })
       return data
     } catch (error) {
-      if (axios.isAxiosError<ErrorRes>(error) && error.response) {
-        return rejectWithValue(error.response.data.message)
-      }
-      return rejectWithValue(error)
+      return rejectWithValue(handleFetchError(error))
     }
   }
 )

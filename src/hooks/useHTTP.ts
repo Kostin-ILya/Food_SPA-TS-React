@@ -1,6 +1,6 @@
+import axios from 'axios'
 import { useCallback, useState } from 'react'
 
-import axios from 'axios'
 import { ErrorRes } from 'shared/interfaces/fetch.interface'
 
 type LoadingStatus = 'idle' | 'loading' | 'error'
@@ -25,7 +25,6 @@ const api = axios.create({
 const authApi = axios.create({
   baseURL: 'https://purpleschool.ru/pizza-api-demo',
 })
-// axios.defaults.baseURL = 'https://purpleschool.ru/pizza-api-demo'
 
 const useHTTP = (axiosInstance: 'api' | 'authApi' = 'api') => {
   const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>('idle')
@@ -61,6 +60,7 @@ const useHTTP = (axiosInstance: 'api' | 'authApi' = 'api') => {
         return data
       } catch (error) {
         setLoadingStatus('error')
+
         if (axios.isAxiosError<ErrorRes>(error) && error.response) {
           setErrorMessage(error.response.data.message)
 
